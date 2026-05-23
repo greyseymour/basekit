@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>BaseKit — Ship onchain in one prompt.</title>
+  <meta name="description" content="The agent skill kit for Base. Five opinionated playbooks + an MCP server for Claude Code, Cursor, Codex, and Windsurf. Install in one command." />
+  <meta name="theme-color" content="#0A0A0F" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="BaseKit — Ship onchain in one prompt." />
+  <meta property="og:description" content="The agent skill kit for Base. Install in one command, works in any coding environment." />
+  <meta property="og:url" content="https://basekit.dev" />
+  <meta property="og:type" content="website" />
+
+  <!-- Fonts: Inter Tight (Base's official fallback) + Doto for hero + JetBrains Mono for code -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Doto:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Favicon (the BaseKit mark) -->
+  <link rel="icon" type="image/svg+xml" href="/assets/mark.svg" />
+
+  <link rel="stylesheet" href="/styles/main.css" />
+
+  <!-- Agent-discoverable metadata -->
+  <link rel="alternate" type="text/plain" title="LLM Index" href="/llms.txt" />
+  <link rel="alternate" type="text/plain" title="Agent Index" href="/agents.txt" />
+</head>
+<body>
+
+  <!-- ─── Background field ─────────────────────────────────────────────────── -->
+  <div class="field" aria-hidden="true">
+    <canvas id="lattice"></canvas>
+    <div class="field-vignette"></div>
+  </div>
+
+  <!-- ─── Header ───────────────────────────────────────────────────────────── -->
+  <header class="nav">
+    <a href="#top" class="brand" aria-label="BaseKit home">
+      <!-- Logo: BaseKit mark = a code-bracket framing a Base-style square -->
+      <svg class="mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <!-- left bracket -->
+        <path d="M11 7 L5 7 L5 33 L11 33" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" />
+        <!-- right bracket -->
+        <path d="M29 7 L35 7 L35 33 L29 33" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" />
+        <!-- inner square (Base nod) -->
+        <rect x="14" y="14" width="12" height="12" fill="currentColor" />
+      </svg>
+      <span class="wordmark">basekit</span>
+    </a>
+
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#install">Install</a>
+      <a href="#skills">Skills</a>
+      <a href="#mcp">MCP</a>
+      <a href="#pricing">Pricing</a>
+      <a href="https://github.com/basekit/basekit" class="ghost">GitHub ↗</a>
+    </nav>
+
+    <button class="theme-toggle" aria-label="Toggle theme" data-action="toggle-theme">
+      <span class="dot"></span>
+    </button>
+  </header>
+
+  <!-- ─── Hero ─────────────────────────────────────────────────────────────── -->
+  <section class="hero" id="top">
+    <div class="hero-eyebrow">
+      <span class="status-dot"></span>
+      v0.1.0 · ship onchain in one prompt
+    </div>
+
+    <h1 class="hero-title">
+      <span class="line" data-scramble="An agent that">An agent that</span>
+      <span class="line accent" data-scramble="speaks Base.">speaks Base.</span>
+    </h1>
+
+    <p class="hero-sub">
+      Five opinionated playbooks and a tight MCP server for every coding agent —
+      Claude&nbsp;Code, Cursor, Codex, Windsurf. Free to install, MIT licensed,
+      built for the way you actually ship.
+    </p>
+
+    <div class="hero-ctas">
+      <a class="cta primary" href="#install">
+        <span>Install BaseKit</span>
+        <kbd>⌘ K</kbd>
+      </a>
+      <a class="cta ghost" href="#skills">See the skills</a>
+    </div>
+
+    <!-- Square-anchored ingress: the hero terminal lives just below -->
+    <div class="hero-terminal glass">
+      <div class="terminal-top">
+        <span class="dots"><i></i><i></i><i></i></span>
+        <span class="terminal-title">~/your-project</span>
+        <span class="terminal-clock" id="clock">--:--</span>
+      </div>
+      <pre class="terminal-body"><span class="prompt">$</span> <span class="cmd" id="hero-cmd">claude plugin install basekit</span><span class="caret">▍</span>
+<span class="out">→ resolving manifest from basekit.dev/plugin.json</span>
+<span class="out">→ installing 5 skills, 1 MCP server</span>
+<span class="out muted">  ✓ base-deploy-token</span>
+<span class="out muted">  ✓ base-analyze-wallet</span>
+<span class="out muted">  ✓ base-gas-optimize</span>
+<span class="out muted">  ✓ base-airdrop</span>
+<span class="out muted">  ✓ base-basescan-debug</span>
+<span class="out accent">ready · try: "deploy an ERC-20 on Base sepolia called Greycoin"</span></pre>
+    </div>
+  </section>
+
+  <!-- ─── Install (human ↔ agent toggle) ───────────────────────────────────── -->
+  <section class="install" id="install">
+    <header class="section-head">
+      <span class="section-tag">/01 · install</span>
+      <h2>One command. Any environment.</h2>
+      <p>Skills follow the open SKILL.md spec — portable across Claude Code, Cursor, Codex, Gemini CLI, and Windsurf.</p>
+    </header>
+
+    <div class="install-card glass">
+      <div class="audience-toggle" role="tablist" aria-label="Install audience">
+        <button class="audience active" role="tab" aria-selected="true" data-audience="human">
+          <span>For humans</span>
+        </button>
+        <button class="audience" role="tab" aria-selected="false" data-audience="agent">
+          <span>For agents</span>
+        </button>
+        <span class="audience-slider" aria-hidden="true"></span>
+      </div>
+
+      <!-- Human view -->
+      <div class="install-panel active" data-panel="human">
+        <div class="env-tabs" role="tablist" aria-label="Coding environment">
+          <button class="env active" data-env="claude">Claude Code</button>
+          <button class="env" data-env="cursor">Cursor</button>
+          <button class="env" data-env="codex">Codex CLI</button>
+          <button class="env" data-env="windsurf">Windsurf</button>
+          <button class="env" data-env="manual">Manual</button>
+        </div>
+
+        <div class="env-body">
+          <pre class="snippet" data-snippet="claude"><span class="prompt">$</span> claude plugin install basekit</pre>
+          <pre class="snippet" data-snippet="cursor" hidden><span class="prompt">$</span> cursor mcp add basekit
+<span class="comment"># or paste into .cursor/mcp.json:</span>
+{ "mcpServers": { "basekit": { "command": "npx", "args": ["-y", "@basekit/mcp"] } } }</pre>
+          <pre class="snippet" data-snippet="codex" hidden><span class="prompt">$</span> codex mcp add basekit npx -- -y @basekit/mcp</pre>
+          <pre class="snippet" data-snippet="windsurf" hidden><span class="prompt">$</span> windsurf mcp add basekit
+<span class="comment"># paste into ~/.codeium/windsurf/mcp_config.json:</span>
+{ "mcpServers": { "basekit": { "command": "npx", "args": ["-y", "@basekit/mcp"] } } }</pre>
+          <pre class="snippet" data-snippet="manual" hidden><span class="prompt">$</span> git clone https://github.com/basekit/basekit
+<span class="prompt">$</span> cd basekit && ./install.sh
+<span class="comment"># or copy ./skills/* into your agent's skill directory</span></pre>
+
+          <button class="copy-btn" data-copy>
+            <span class="copy-label">Copy</span>
+          </button>
+        </div>
+
+        <div class="env-note">
+          <span class="kicker">After install:</span>
+          ask your agent <em>"deploy an ERC-20 on Base sepolia"</em> and the right skill activates automatically.
+        </div>
+      </div>
+
+      <!-- Agent view -->
+      <div class="install-panel" data-panel="agent" hidden>
+        <div class="agent-grid">
+          <a class="agent-card" href="/llms.txt">
+            <header>
+              <code>/llms.txt</code>
+              <span class="badge">discovery</span>
+            </header>
+            <p>Plain-text index of every skill, tool, and capability — the canonical entry point for an agent crawling basekit.dev.</p>
+          </a>
+          <a class="agent-card" href="/agents.txt">
+            <header>
+              <code>/agents.txt</code>
+              <span class="badge">permissions</span>
+            </header>
+            <p>Robots.txt for agents — declared rate limits, allowed paths, and authentication hints.</p>
+          </a>
+          <a class="agent-card" href="/skill.md">
+            <header>
+              <code>/skill.md</code>
+              <span class="badge">manifest</span>
+            </header>
+            <p>The whole BaseKit playbook in one SKILL.md — drop into any SKILL.md-compatible runtime.</p>
+          </a>
+          <a class="agent-card" href="/plugin.json">
+            <header>
+              <code>/plugin.json</code>
+              <span class="badge">manifest</span>
+            </header>
+            <p>Claude plugin manifest. Bundles all five skills + the MCP server in one install.</p>
+          </a>
+          <a class="agent-card" href="https://github.com/basekit/basekit/raw/main/.well-known/mcp.json">
+            <header>
+              <code>.well-known/mcp.json</code>
+              <span class="badge">mcp</span>
+            </header>
+            <p>MCP server discovery descriptor with stdio + sse endpoints and tool catalog.</p>
+          </a>
+          <a class="agent-card" href="https://github.com/basekit/basekit">
+            <header>
+              <code>git://basekit/basekit</code>
+              <span class="badge">source</span>
+            </header>
+            <p>Read the source. MIT licensed. Fork freely, contribute upstream.</p>
+          </a>
+        </div>
+
+        <div class="env-note">
+          <span class="kicker">For agentic crawlers:</span>
+          we publish manifests at predictable paths so an agent can install BaseKit by following links alone — no human in the loop required.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Skills ───────────────────────────────────────────────────────────── -->
+  <section class="skills" id="skills">
+    <header class="section-head">
+      <span class="section-tag">/02 · skills</span>
+      <h2>Five playbooks. Zero copy-paste.</h2>
+      <p>Each skill is a markdown playbook your agent loads on demand. Average size: ~100 lines of instructions, 0 lines of magic.</p>
+    </header>
+
+    <ol class="skill-grid">
+      <li class="skill glass" tabindex="0" data-skill="deploy">
+        <div class="skill-head">
+          <span class="skill-num">01</span>
+          <h3>base-deploy-token</h3>
+        </div>
+        <p>Ship an ERC-20 from prompt to verified contract on Basescan. Foundry under the hood, Aerodrome liquidity routing optional.</p>
+        <div class="skill-trigger">
+          <span class="hint">trigger</span>
+          <code>"deploy a token on Base"</code>
+        </div>
+      </li>
+
+      <li class="skill glass" tabindex="0" data-skill="wallet">
+        <div class="skill-head">
+          <span class="skill-num">02</span>
+          <h3>base-analyze-wallet</h3>
+        </div>
+        <p>Profile any address: activity, holdings, counterparties, risk signals. Forensics-grade, with citations.</p>
+        <div class="skill-trigger">
+          <span class="hint">trigger</span>
+          <code>"analyze 0x… on Base"</code>
+        </div>
+      </li>
+
+      <li class="skill glass" tabindex="0" data-skill="gas">
+        <div class="skill-head">
+          <span class="skill-num">03</span>
+          <h3>base-gas-optimize</h3>
+        </div>
+        <p>Audit a Solidity contract for gas waste. Prioritized diffs, risk-flagged, calldata-conscious for Base economics.</p>
+        <div class="skill-trigger">
+          <span class="hint">trigger</span>
+          <code>"reduce gas in this contract"</code>
+        </div>
+      </li>
+
+      <li class="skill glass" tabindex="0" data-skill="airdrop">
+        <div class="skill-head">
+          <span class="skill-num">04</span>
+          <h3>base-airdrop</h3>
+        </div>
+        <p>Merkle drops, sybil filtering, gas-paid-by-claimer pattern. Includes the claim contract and the proof generator.</p>
+        <div class="skill-trigger">
+          <span class="hint">trigger</span>
+          <code>"airdrop tokens to a list"</code>
+        </div>
+      </li>
+
+      <li class="skill glass wide" tabindex="0" data-skill="debug">
+        <div class="skill-head">
+          <span class="skill-num">05</span>
+          <h3>base-basescan-debug</h3>
+        </div>
+        <p>Paste a failed tx hash. Get the decoded call tree, the failing frame, the root cause, and the fix — Tenderly link included.</p>
+        <div class="skill-trigger">
+          <span class="hint">trigger</span>
+          <code>"why did this tx fail on base?"</code>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ─── MCP ──────────────────────────────────────────────────────────────── -->
+  <section class="mcp" id="mcp">
+    <header class="section-head">
+      <span class="section-tag">/03 · mcp</span>
+      <h2>Six tools your agent can call directly.</h2>
+      <p>Skills give your agent <em>playbooks</em>. The BaseKit MCP server gives it <em>arms</em>.</p>
+    </header>
+
+    <div class="mcp-grid">
+      <div class="mcp-tool glass">
+        <code>get_wallet_profile</code>
+        <p>Activity, holdings, counterparties for an address.</p>
+      </div>
+      <div class="mcp-tool glass">
+        <code>get_transaction_trace</code>
+        <p>Decoded trace, revert reason, failing frame.</p>
+      </div>
+      <div class="mcp-tool glass">
+        <code>estimate_token_deploy</code>
+        <p>Preflight gas + ETH cost at current base fee.</p>
+      </div>
+      <div class="mcp-tool glass">
+        <code>check_token_approvals</code>
+        <p>List active approvals; surface dangerous ones.</p>
+      </div>
+      <div class="mcp-tool glass">
+        <code>resolve_basename</code>
+        <p>Basename ↔ address, both directions.</p>
+      </div>
+      <div class="mcp-tool glass">
+        <code>simulate_swap</code>
+        <p>Quote on Uniswap V3 or Aerodrome, read-only.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Pricing ──────────────────────────────────────────────────────────── -->
+  <section class="pricing" id="pricing">
+    <header class="section-head">
+      <span class="section-tag">/04 · pricing</span>
+      <h2>Free to install. Pay when it pays you back.</h2>
+      <p>Core is open source. Pro adds advanced playbooks and hosted indexing for teams shipping in production.</p>
+    </header>
+
+    <div class="price-grid">
+      <div class="plan glass">
+        <header>
+          <h3>Open Source</h3>
+          <div class="price">$0<span>forever</span></div>
+        </header>
+        <ul>
+          <li>5 core skills</li>
+          <li>MCP server (6 tools)</li>
+          <li>Self-hosted, BYO API keys</li>
+          <li>MIT license</li>
+          <li>Community support</li>
+        </ul>
+        <a class="plan-cta ghost" href="#install">Install free</a>
+      </div>
+
+      <div class="plan glass featured">
+        <header>
+          <h3>Pro</h3>
+          <div class="price">$19<span>/ month</span></div>
+          <div class="subprice">or $190/yr · or $79 one-time on SkillHQ</div>
+        </header>
+        <ul>
+          <li>Everything in Open Source</li>
+          <li><strong>10+ advanced skills</strong> — MEV-resistant deploys, multi-sig workflows, treasury playbooks</li>
+          <li><strong>Hosted indexing</strong> — wallet & contract data without your own Alchemy key</li>
+          <li>Monthly new-skill drops</li>
+          <li>Priority email support</li>
+        </ul>
+        <a class="plan-cta primary" href="#waitlist">Join the Pro waitlist</a>
+      </div>
+
+      <div class="plan glass">
+        <header>
+          <h3>Studio</h3>
+          <div class="price">$99<span>/ month</span></div>
+          <div class="subprice">5 seats · Slack support</div>
+        </header>
+        <ul>
+          <li>Everything in Pro</li>
+          <li>Shared org API keys</li>
+          <li>Custom skill requests (1/mo)</li>
+          <li>Slack channel with the team</li>
+          <li>Onboarding session</li>
+        </ul>
+        <a class="plan-cta ghost" href="mailto:hello@basekit.dev">Talk to us</a>
+      </div>
+    </div>
+
+    <p class="price-foot">
+      Building something at scale? <a href="mailto:hello@basekit.dev">Enterprise &amp; white-label</a> available.
+    </p>
+  </section>
+
+  <!-- ─── FAQ / Anti-AI strip ──────────────────────────────────────────────── -->
+  <section class="strip">
+    <p>
+      <span class="strip-kicker">opinionated:</span>
+      <span class="strip-text" data-rotator>
+        <span class="rot active">we don't ship gradient hero blobs.</span>
+        <span class="rot">we don't pretend to be sentient.</span>
+        <span class="rot">we don't auto-emoji your prompts.</span>
+        <span class="rot">we don't put a chatbot on the marketing site.</span>
+        <span class="rot">we don't gate the source.</span>
+      </span>
+    </p>
+  </section>
+
+  <!-- ─── Footer ───────────────────────────────────────────────────────────── -->
+  <footer class="foot">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <svg class="mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <path d="M11 7 L5 7 L5 33 L11 33" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" />
+          <path d="M29 7 L35 7 L35 33 L29 33" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" />
+          <rect x="14" y="14" width="12" height="12" fill="currentColor" />
+        </svg>
+        <span class="wordmark">basekit</span>
+        <p>Built on Base. Built for agents. Built in the open.</p>
+      </div>
+
+      <div class="foot-links">
+        <div>
+          <h4>Product</h4>
+          <a href="#install">Install</a>
+          <a href="#skills">Skills</a>
+          <a href="#mcp">MCP</a>
+          <a href="#pricing">Pricing</a>
+        </div>
+        <div>
+          <h4>For agents</h4>
+          <a href="/llms.txt"><code>/llms.txt</code></a>
+          <a href="/agents.txt"><code>/agents.txt</code></a>
+          <a href="/skill.md"><code>/skill.md</code></a>
+          <a href="/plugin.json"><code>/plugin.json</code></a>
+        </div>
+        <div>
+          <h4>Open source</h4>
+          <a href="https://github.com/basekit/basekit">GitHub</a>
+          <a href="https://github.com/basekit/basekit/issues">Issues</a>
+          <a href="https://github.com/basekit/basekit/discussions">Discussions</a>
+          <a href="https://github.com/basekit/basekit/blob/main/LICENSE">License (MIT)</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="foot-base">
+      <span>© 2026 BaseKit · MIT</span>
+      <span class="easter" title="try typing 'gm' on this page">made with 🩵 by builders on Base</span>
+    </div>
+  </footer>
+
+  <!-- Konami / easter overlay -->
+  <div class="konami" id="konami" hidden>
+    <pre>
+   ╔══════════════════════════════════════════╗
+   ║                                          ║
+   ║       gm.                                ║
+   ║       you found the easter egg.          ║
+   ║                                          ║
+   ║       press [esc] to close               ║
+   ║       or stay and read the source        ║
+   ║                                          ║
+   ╚══════════════════════════════════════════╝
+    </pre>
+  </div>
+
+  <script src="/scripts/main.js" type="module"></script>
+</body>
+</html>

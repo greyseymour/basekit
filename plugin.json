@@ -1,0 +1,39 @@
+{
+  "$schema": "https://schemas.anthropic.com/claude-plugin/v1",
+  "name": "basekit",
+  "version": "0.1.0",
+  "description": "The agent skill kit for Base. Ship onchain in one prompt.",
+  "homepage": "https://basekit.dev",
+  "repository": "https://github.com/basekit/basekit",
+  "license": "MIT",
+  "authors": [{ "name": "BaseKit", "url": "https://basekit.dev" }],
+  "keywords": ["base", "blockchain", "ethereum", "coinbase", "agent", "web3", "onchain"],
+
+  "skills": [
+    { "path": "./skills/base-deploy-token" },
+    { "path": "./skills/base-analyze-wallet" },
+    { "path": "./skills/base-gas-optimize" },
+    { "path": "./skills/base-airdrop" },
+    { "path": "./skills/base-basescan-debug" }
+  ],
+
+  "mcp_servers": {
+    "basekit": {
+      "command": "npx",
+      "args": ["-y", "@basekit/mcp"],
+      "env": {
+        "BASESCAN_API_KEY": "${BASESCAN_API_KEY}",
+        "ALCHEMY_API_KEY": "${ALCHEMY_API_KEY:-}",
+        "BASE_RPC_URL": "${BASE_RPC_URL:-https://mainnet.base.org}"
+      }
+    }
+  },
+
+  "commands": {
+    "base:deploy": "Activate the base-deploy-token skill",
+    "base:wallet": "Activate the base-analyze-wallet skill",
+    "base:gas": "Activate the base-gas-optimize skill",
+    "base:airdrop": "Activate the base-airdrop skill",
+    "base:debug": "Activate the base-basescan-debug skill"
+  }
+}

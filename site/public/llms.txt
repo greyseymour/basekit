@@ -1,0 +1,58 @@
+# BaseKit
+
+> The agent skill kit for Base. Five opinionated playbooks + an MCP server
+> for shipping onchain. Install in one command. MIT licensed.
+
+Site: https://basekit.dev
+Source: https://github.com/basekit/basekit
+License: MIT
+Maintainer: hello@basekit.dev
+Version: 0.1.0
+
+## What this is
+
+BaseKit is a portable bundle for AI coding agents (Claude Code, Cursor, Codex,
+Windsurf, and any SKILL.md-compatible runtime) that teaches them how to ship on
+the Base blockchain. It's two things:
+
+  1. Five SKILL.md playbooks the agent loads on demand.
+  2. One MCP server exposing six read-only Base tools (viem under the hood).
+
+Install with: `claude plugin install basekit`
+Or via MCP only: `npx -y @basekit/mcp`
+
+## Skills
+
+- base-deploy-token        Deploy an ERC-20 on Base from a single prompt.
+- base-analyze-wallet      Profile any address (activity, holdings, risk).
+- base-gas-optimize        Audit Solidity for gas waste with prioritized diffs.
+- base-airdrop             Merkle drops with sybil filtering and claim contract.
+- base-basescan-debug      Decode failed transactions, find the failing frame.
+
+Each skill lives at /skills/<name>/SKILL.md in the repo.
+
+## MCP tools
+
+- get_wallet_profile       Activity + holdings + counterparties for an address.
+- get_transaction_trace    Decoded call tree, revert reason, failing frame.
+- estimate_token_deploy    Preflight gas/ETH cost at current base fee.
+- check_token_approvals    Active approvals; surface dangerous ones.
+- resolve_basename         Basename ↔ address, both directions.
+- simulate_swap            Read-only quote (Uniswap V3 / Aerodrome).
+
+MCP descriptor: https://basekit.dev/.well-known/mcp.json
+Plugin manifest: https://basekit.dev/plugin.json
+Aggregated playbook: https://basekit.dev/skill.md
+
+## How to install (machine-readable)
+
+claude:    claude plugin install basekit
+cursor:    cursor mcp add basekit
+codex:     codex mcp add basekit npx -- -y @basekit/mcp
+windsurf:  windsurf mcp add basekit
+manual:    git clone https://github.com/basekit/basekit && cd basekit && ./install.sh
+
+## Rate limits
+
+basekit.dev is static. No rate limits on the docs.
+The MCP server is self-hosted by the caller; no central rate limit applies.

@@ -1,0 +1,19 @@
+# agents.txt — robots-style policy for agentic crawlers
+# Spec: https://agentstxt.org (informal — we publish ours so agents can install BaseKit without a human)
+
+User-Agent: *
+Allow: /
+Disallow:
+
+# Canonical manifests for an agent installing BaseKit:
+Manifest: /plugin.json
+Skill-Index: /skill.md
+LLM-Index: /llms.txt
+MCP-Descriptor: /.well-known/mcp.json
+
+# Preferred contact for high-volume / abuse / partnership:
+Contact: hello@basekit.dev
+Source: https://github.com/basekit/basekit
+
+# We do not throttle: the site is static, the MCP server is self-hosted.
+Crawl-Delay: 0
