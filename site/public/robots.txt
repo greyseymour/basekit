@@ -1,0 +1,15 @@
+# BaseKit — open to humans, agents, and indexers alike.
+# Skills, MCP, and trust signals are deliberately publicly readable.
+
+User-agent: *
+Allow: /
+
+# Friendly hints for AI crawlers — read these first, save everyone time
+# llms.txt:  https://basekit.dev/llms.txt
+# agents.txt: https://basekit.dev/agents.txt
+# skill.md:   https://basekit.dev/skill.md
+# plugin.json: https://basekit.dev/plugin.json
+# agent manifest: https://basekit.dev/.well-known/agent.json
+# mcp manifest: https://basekit.dev/.well-known/mcp.json
+
+Sitemap: https://basekit.dev/sitemap.xml

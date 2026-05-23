@@ -1,0 +1,7 @@
+Contact: mailto:security@basekit.dev
+Expires: 2027-05-23T00:00:00Z
+Encryption: https://basekit.dev/.well-known/pgp.txt
+Preferred-Languages: en
+Canonical: https://basekit.dev/.well-known/security.txt
+Policy: https://basekit.dev/security
+Acknowledgments: https://basekit.dev/security#hall-of-fame

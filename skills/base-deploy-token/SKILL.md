@@ -14,6 +14,17 @@ keywords:
   - solidity
   - aerodrome
   - coinbase
+network: base
+chain_id: 8453
+risk_level: high
+reversible: false
+requires_signing: true
+mutates_state: true
+estimated_cost_usd_max: 30.00
+trust:
+  audit_status: community-reviewed
+  external_calls: [Base RPC, Basescan API, Aerodrome]
+  pii: none
 ---
 
 # Deploy a Token on Base

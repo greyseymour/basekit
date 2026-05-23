@@ -3,29 +3,71 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>BaseKit — Ship onchain in one prompt.</title>
-  <meta name="description" content="The agent skill kit for Base. Five opinionated playbooks + an MCP server for Claude Code, Cursor, Codex, and Windsurf. Install in one command." />
+  <title>BaseKit — Skills, MCP, and trust primitives for Base.</title>
+  <meta name="description" content="15 SKILL.md playbooks, a 13-tool MCP server, and a complete A2A trust layer for building on Base. MIT licensed. Designed to be safe for autonomous agents." />
   <meta name="theme-color" content="#0A0A0F" />
+  <meta name="color-scheme" content="dark light" />
+  <link rel="canonical" href="https://basekit.dev/" />
 
   <!-- Open Graph -->
-  <meta property="og:title" content="BaseKit — Ship onchain in one prompt." />
-  <meta property="og:description" content="The agent skill kit for Base. Install in one command, works in any coding environment." />
-  <meta property="og:url" content="https://basekit.dev" />
+  <meta property="og:title" content="BaseKit — Skills, MCP, and trust primitives for Base." />
+  <meta property="og:description" content="15 SKILL.md playbooks, 13-tool MCP server, A2A trust layer. MIT, safe for autonomous agents." />
+  <meta property="og:url" content="https://basekit.dev/" />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="BaseKit" />
+  <meta property="og:image" content="https://basekit.dev/assets/og/basekit-og.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="BaseKit — skills, MCP, agents for Base. Version 0.2." />
 
-  <!-- Fonts: Inter Tight (Base's official fallback) + Doto for hero + JetBrains Mono for code -->
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="BaseKit — Skills, MCP, and trust primitives for Base." />
+  <meta name="twitter:description" content="15 SKILL.md playbooks, 13-tool MCP server, A2A trust layer. MIT licensed." />
+  <meta name="twitter:image" content="https://basekit.dev/assets/og/basekit-og.png" />
+
+  <!-- Farcaster Frame (v2) -->
+  <meta name="fc:frame" content='{"version":"next","imageUrl":"https://basekit.dev/assets/og/basekit-og.png","button":{"title":"Open BaseKit","action":{"type":"launch_frame","url":"https://basekit.dev","name":"BaseKit","splashImageUrl":"https://basekit.dev/assets/favicon/android-chrome-512.png","splashBackgroundColor":"#0A0A0F"}}}' />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+
+  <!-- Fonts: Inter Tight (UI) + Doto (hero display) + JetBrains Mono (code) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Doto:wght@400;700&display=swap" rel="stylesheet" />
-
-  <!-- Favicon (the BaseKit mark) -->
-  <link rel="icon" type="image/svg+xml" href="/assets/mark.svg" />
 
   <link rel="stylesheet" href="/styles/main.css" />
 
   <!-- Agent-discoverable metadata -->
   <link rel="alternate" type="text/plain" title="LLM Index" href="/llms.txt" />
   <link rel="alternate" type="text/plain" title="Agent Index" href="/agents.txt" />
+  <link rel="alternate" type="application/json" title="Agent Manifest" href="/.well-known/agent.json" />
+  <link rel="alternate" type="application/json" title="MCP Manifest" href="/.well-known/mcp.json" />
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "BaseKit",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Cross-platform",
+    "description": "Skills, MCP, and trust primitives for building on Base.",
+    "url": "https://basekit.dev",
+    "license": "https://opensource.org/licenses/MIT",
+    "offers": [
+      {"@type":"Offer","name":"Open Source","price":"0","priceCurrency":"USD"},
+      {"@type":"Offer","name":"Pro","price":"19","priceCurrency":"USD"}
+    ],
+    "softwareVersion": "0.2.0"
+  }
+  </script>
 </head>
 <body>
 
@@ -38,14 +80,10 @@
   <!-- ─── Header ───────────────────────────────────────────────────────────── -->
   <header class="nav">
     <a href="#top" class="brand" aria-label="BaseKit home">
-      <!-- Logo: BaseKit mark = a code-bracket framing a Base-style square -->
-      <svg class="mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-        <!-- left bracket -->
-        <path d="M11 7 L5 7 L5 33 L11 33" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" />
-        <!-- right bracket -->
-        <path d="M29 7 L35 7 L35 33 L29 33" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" />
-        <!-- inner square (Base nod) -->
-        <rect x="14" y="14" width="12" height="12" fill="currentColor" />
+      <svg class="mark" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+        <rect x="10" y="10" width="44" height="44" rx="2" stroke="currentColor" stroke-width="3" transform="rotate(-7.5 32 32)"/>
+        <rect x="19" y="19" width="26" height="26" rx="1.5" stroke="currentColor" stroke-width="3" transform="rotate(7.5 32 32)"/>
+        <rect x="26" y="26" width="12" height="12" rx="1" stroke="currentColor" stroke-width="3"/>
       </svg>
       <span class="wordmark">basekit</span>
     </a>
@@ -54,6 +92,7 @@
       <a href="#install">Install</a>
       <a href="#skills">Skills</a>
       <a href="#mcp">MCP</a>
+      <a href="#a2a">A2A</a>
       <a href="#pricing">Pricing</a>
       <a href="https://github.com/basekit/basekit" class="ghost">GitHub ↗</a>
     </nav>
@@ -67,7 +106,7 @@
   <section class="hero" id="top">
     <div class="hero-eyebrow">
       <span class="status-dot"></span>
-      v0.1.0 · ship onchain in one prompt
+      v0.2.0 · 15 skills · 13 MCP tools · MIT
     </div>
 
     <h1 class="hero-title">
@@ -76,9 +115,9 @@
     </h1>
 
     <p class="hero-sub">
-      Five opinionated playbooks and a tight MCP server for every coding agent —
-      Claude&nbsp;Code, Cursor, Codex, Windsurf. Free to install, MIT licensed,
-      built for the way you actually ship.
+      Open SKILL.md playbooks, a tight MCP server, and a complete A2A trust layer —
+      designed so autonomous agents can build on Base safely on a human's behalf.
+      Works in Claude Code, Cursor, Codex, Windsurf, and any MCP-aware runtime.
     </p>
 
     <div class="hero-ctas">
@@ -86,10 +125,9 @@
         <span>Install BaseKit</span>
         <kbd>⌘ K</kbd>
       </a>
-      <a class="cta ghost" href="#skills">See the skills</a>
+      <a class="cta ghost" href="#skills">See the 15 skills</a>
     </div>
 
-    <!-- Square-anchored ingress: the hero terminal lives just below -->
     <div class="hero-terminal glass">
       <div class="terminal-top">
         <span class="dots"><i></i><i></i><i></i></span>
@@ -98,22 +136,25 @@
       </div>
       <pre class="terminal-body"><span class="prompt">$</span> <span class="cmd" id="hero-cmd">claude plugin install basekit</span><span class="caret">▍</span>
 <span class="out">→ resolving manifest from basekit.dev/plugin.json</span>
-<span class="out">→ installing 5 skills, 1 MCP server</span>
-<span class="out muted">  ✓ base-deploy-token</span>
-<span class="out muted">  ✓ base-analyze-wallet</span>
-<span class="out muted">  ✓ base-gas-optimize</span>
-<span class="out muted">  ✓ base-airdrop</span>
-<span class="out muted">  ✓ base-basescan-debug</span>
-<span class="out accent">ready · try: "deploy an ERC-20 on Base sepolia called Greycoin"</span></pre>
+<span class="out">→ installing 15 skills, 1 MCP server (13 tools)</span>
+<span class="out muted">  ✓ base-deploy-token       base-analyze-wallet</span>
+<span class="out muted">  ✓ base-mev-resistant      base-contract-verify</span>
+<span class="out muted">  ✓ base-onramp-flow        base-portfolio-snapshot</span>
+<span class="out muted">  ✓ base-frame-build        base-safe-multisig</span>
+<span class="out muted">  ✓ base-revenue-share      base-event-listener</span>
+<span class="out muted">  ✓ base-gas-optimize       base-airdrop</span>
+<span class="out muted">  ✓ base-basescan-debug     base-token-launch-checklist</span>
+<span class="out muted">  ✓ agent-onchain-handshake</span>
+<span class="out accent">ready · try: "deploy a token on Base and verify it"</span></pre>
     </div>
   </section>
 
-  <!-- ─── Install (human ↔ agent toggle) ───────────────────────────────────── -->
+  <!-- ─── Install ──────────────────────────────────────────────────────────── -->
   <section class="install" id="install">
     <header class="section-head">
       <span class="section-tag">/01 · install</span>
       <h2>One command. Any environment.</h2>
-      <p>Skills follow the open SKILL.md spec — portable across Claude Code, Cursor, Codex, Gemini CLI, and Windsurf.</p>
+      <p>Skills follow the open SKILL.md spec — portable across Claude Code, Cursor, Codex, Gemini CLI, Windsurf, and any MCP-aware agent runtime.</p>
     </header>
 
     <div class="install-card glass">
@@ -164,53 +205,53 @@
       <!-- Agent view -->
       <div class="install-panel" data-panel="agent" hidden>
         <div class="agent-grid">
-          <a class="agent-card" href="/llms.txt">
+          <a class="agent-card" href="/.well-known/agent.json">
             <header>
-              <code>/llms.txt</code>
-              <span class="badge">discovery</span>
+              <code>/.well-known/agent.json</code>
+              <span class="badge">a2a</span>
             </header>
-            <p>Plain-text index of every skill, tool, and capability — the canonical entry point for an agent crawling basekit.dev.</p>
+            <p>Full capability descriptor: skills, MCP, supported protocols (EIP-7702, ERC-7821), trust claims, security contact. The canonical machine-readable entry point.</p>
           </a>
-          <a class="agent-card" href="/agents.txt">
+          <a class="agent-card" href="/.well-known/mcp.json">
             <header>
-              <code>/agents.txt</code>
-              <span class="badge">permissions</span>
+              <code>/.well-known/mcp.json</code>
+              <span class="badge">mcp</span>
             </header>
-            <p>Robots.txt for agents — declared rate limits, allowed paths, and authentication hints.</p>
+            <p>MCP server descriptor — tool catalog, install snippet for Claude Desktop config, declared side-effects (none — server is read-only).</p>
           </a>
           <a class="agent-card" href="/skill.md">
             <header>
               <code>/skill.md</code>
-              <span class="badge">manifest</span>
+              <span class="badge">index</span>
             </header>
-            <p>The whole BaseKit playbook in one SKILL.md — drop into any SKILL.md-compatible runtime.</p>
+            <p>Every skill in one document. Each entry includes risk level, reversibility, and signing requirements as machine-readable frontmatter.</p>
           </a>
           <a class="agent-card" href="/plugin.json">
             <header>
               <code>/plugin.json</code>
               <span class="badge">manifest</span>
             </header>
-            <p>Claude plugin manifest. Bundles all five skills + the MCP server in one install.</p>
+            <p>Claude plugin manifest. Single-install for all 15 skills + the MCP server.</p>
           </a>
-          <a class="agent-card" href="https://github.com/basekit/basekit/raw/main/.well-known/mcp.json">
+          <a class="agent-card" href="/llms.txt">
             <header>
-              <code>.well-known/mcp.json</code>
-              <span class="badge">mcp</span>
+              <code>/llms.txt</code>
+              <span class="badge">summary</span>
             </header>
-            <p>MCP server discovery descriptor with stdio + sse endpoints and tool catalog.</p>
+            <p>One-screen summary for LLMs. Trust signals, capability claims, and links to the canonical manifests.</p>
           </a>
-          <a class="agent-card" href="https://github.com/basekit/basekit">
+          <a class="agent-card" href="/agents.txt">
             <header>
-              <code>git://basekit/basekit</code>
-              <span class="badge">source</span>
+              <code>/agents.txt</code>
+              <span class="badge">discovery</span>
             </header>
-            <p>Read the source. MIT licensed. Fork freely, contribute upstream.</p>
+            <p>Plain-text manifest pointer set. Robots.txt for autonomous agents.</p>
           </a>
         </div>
 
         <div class="env-note">
-          <span class="kicker">For agentic crawlers:</span>
-          we publish manifests at predictable paths so an agent can install BaseKit by following links alone — no human in the loop required.
+          <span class="kicker">For autonomous agents:</span>
+          we publish every manifest at predictable paths so you can install BaseKit by following links alone — no human in the loop required.
         </div>
       </div>
     </div>
@@ -220,113 +261,167 @@
   <section class="skills" id="skills">
     <header class="section-head">
       <span class="section-tag">/02 · skills</span>
-      <h2>Five playbooks. Zero copy-paste.</h2>
-      <p>Each skill is a markdown playbook your agent loads on demand. Average size: ~100 lines of instructions, 0 lines of magic.</p>
+      <h2>Fifteen playbooks. Zero copy-paste.</h2>
+      <p>Each skill is a markdown playbook your agent loads on demand. Frontmatter declares risk, reversibility, and cost — so agents can decide whether to run unattended.</p>
     </header>
 
     <ol class="skill-grid">
-      <li class="skill glass" tabindex="0" data-skill="deploy">
-        <div class="skill-head">
-          <span class="skill-num">01</span>
-          <h3>base-deploy-token</h3>
-        </div>
-        <p>Ship an ERC-20 from prompt to verified contract on Basescan. Foundry under the hood, Aerodrome liquidity routing optional.</p>
-        <div class="skill-trigger">
-          <span class="hint">trigger</span>
-          <code>"deploy a token on Base"</code>
-        </div>
+      <li class="skill glass" tabindex="0">
+        <div class="skill-head"><span class="skill-num">01</span><h3>base-deploy-token</h3></div>
+        <p>Prompt to verified ERC-20 on Base. Foundry under the hood, Aerodrome liquidity routing optional.</p>
+        <div class="skill-meta"><span class="risk r-high">high risk</span><span>~$30 max</span></div>
       </li>
-
-      <li class="skill glass" tabindex="0" data-skill="wallet">
-        <div class="skill-head">
-          <span class="skill-num">02</span>
-          <h3>base-analyze-wallet</h3>
-        </div>
-        <p>Profile any address: activity, holdings, counterparties, risk signals. Forensics-grade, with citations.</p>
-        <div class="skill-trigger">
-          <span class="hint">trigger</span>
-          <code>"analyze 0x… on Base"</code>
-        </div>
+      <li class="skill glass" tabindex="0">
+        <div class="skill-head"><span class="skill-num">02</span><h3>base-mev-resistant</h3></div>
+        <p>Private mempool routing, slippage guards, commit-reveal launches, post-trade sandwich detection.</p>
+        <div class="skill-meta"><span class="risk r-med">medium</span><span>~$5 max</span></div>
       </li>
-
-      <li class="skill glass" tabindex="0" data-skill="gas">
-        <div class="skill-head">
-          <span class="skill-num">03</span>
-          <h3>base-gas-optimize</h3>
-        </div>
-        <p>Audit a Solidity contract for gas waste. Prioritized diffs, risk-flagged, calldata-conscious for Base economics.</p>
-        <div class="skill-trigger">
-          <span class="hint">trigger</span>
-          <code>"reduce gas in this contract"</code>
-        </div>
+      <li class="skill glass" tabindex="0">
+        <div class="skill-head"><span class="skill-num">03</span><h3>base-contract-verify</h3></div>
+        <p>Source, owner type, mint/pause/blacklist scan, GoPlus cross-check, verdict + warnings. Agent's safety gate.</p>
+        <div class="skill-meta"><span class="risk r-none">read-only</span><span>free</span></div>
       </li>
-
-      <li class="skill glass" tabindex="0" data-skill="airdrop">
-        <div class="skill-head">
-          <span class="skill-num">04</span>
-          <h3>base-airdrop</h3>
-        </div>
-        <p>Merkle drops, sybil filtering, gas-paid-by-claimer pattern. Includes the claim contract and the proof generator.</p>
-        <div class="skill-trigger">
-          <span class="hint">trigger</span>
-          <code>"airdrop tokens to a list"</code>
-        </div>
+      <li class="skill glass" tabindex="0">
+        <div class="skill-head"><span class="skill-num">04</span><h3>base-analyze-wallet</h3></div>
+        <p>Activity, holdings, counterparties, risk signals. Forensics-grade with Basescan citations.</p>
+        <div class="skill-meta"><span class="risk r-none">read-only</span><span>free</span></div>
       </li>
-
-      <li class="skill glass wide" tabindex="0" data-skill="debug">
-        <div class="skill-head">
-          <span class="skill-num">05</span>
-          <h3>base-basescan-debug</h3>
-        </div>
-        <p>Paste a failed tx hash. Get the decoded call tree, the failing frame, the root cause, and the fix — Tenderly link included.</p>
-        <div class="skill-trigger">
-          <span class="hint">trigger</span>
-          <code>"why did this tx fail on base?"</code>
-        </div>
+      <li class="skill glass" tabindex="0">
+        <div class="skill-head"><span class="skill-num">05</span><h3>base-portfolio-snapshot</h3></div>
+        <p>Tokens, NFTs, DeFi positions, P&amp;L. Honeypot filter. Designed to feed downstream agent skills.</p>
+        <div class="skill-meta"><span class="risk r-none">read-only</span><span>free</span></div>
+      </li>
+      <li class="skill glass" tabindex="0">
+        <div class="skill-head"><span class="skill-num">06</span><h3>base-onramp-flow</h3></div>
+        <p>Non-crypto user to funded Base wallet in under 3 minutes. Coinbase Smart Wallet + Onramp + sponsored first tx.</p>
+        <div class="skill-meta"><span class="risk r-low">low</span><span>~$1 max</span></div>
+      </li>
+      <li class="skill glass" tabindex="0">
+        <div class="skill-head"><span class="skill-num">07</span><h3>base-token-launch-checklist</h3></div>
+        <p>Pre-launch audit, distribution plan, atomic LP add, post-launch monitoring. The full launch playbook.</p>
+        <div class="skill-meta"><span class="risk r-high">high</span><span>~$50 max</span></div>
+      </li>
+      <li class="skill glass" tabindex="0">
+        <div class="skill-head"><span class="skill-num">08</span><h3>base-safe-multisig</h3></div>
+        <p>Deploy, threshold guidance, propose/sign/execute, signer rotation, recovery patterns.</p>
+        <div class="skill-meta"><span class="risk r-med">medium</span><span>~$6 max</span></div>
+      </li>
+      <li class="skill glass" tabindex="0">
+        <div class="skill-head"><span class="skill-num">09</span><h3>base-revenue-share</h3></div>
+        <p>0xSplits-based revenue routing. Pull/push patterns, creator royalties, contractor pools, referral programs.</p>
+        <div class="skill-meta"><span class="risk r-med">medium</span><span>~$8 max</span></div>
+      </li>
+      <li class="skill glass" tabindex="0">
+        <div class="skill-head"><span class="skill-num">10</span><h3>base-event-listener</h3></div>
+        <p>Reliable event subscription with backfill, reorg handling, exactly-once delivery. Webhook signing built in.</p>
+        <div class="skill-meta"><span class="risk r-none">read-only</span><span>free</span></div>
+      </li>
+      <li class="skill glass" tabindex="0">
+        <div class="skill-head"><span class="skill-num">11</span><h3>base-frame-build</h3></div>
+        <p>Farcaster Frame v2 / Mini App from scratch. Distribution-first with notification permissions and OG card.</p>
+        <div class="skill-meta"><span class="risk r-low">low</span><span>~$2 max</span></div>
+      </li>
+      <li class="skill glass" tabindex="0">
+        <div class="skill-head"><span class="skill-num">12</span><h3>base-airdrop</h3></div>
+        <p>Merkle drops, sybil filtering, gas-paid-by-claimer pattern. Claim contract + proof generator included.</p>
+        <div class="skill-meta"><span class="risk r-med">medium</span><span>~$40 max</span></div>
+      </li>
+      <li class="skill glass" tabindex="0">
+        <div class="skill-head"><span class="skill-num">13</span><h3>base-gas-optimize</h3></div>
+        <p>Audit Solidity for gas waste. Prioritized diffs, calldata-conscious for Base economics.</p>
+        <div class="skill-meta"><span class="risk r-none">read-only</span><span>free</span></div>
+      </li>
+      <li class="skill glass" tabindex="0">
+        <div class="skill-head"><span class="skill-num">14</span><h3>base-basescan-debug</h3></div>
+        <p>Paste a failed tx. Get the decoded trace, failing frame, root cause, and the fix — Tenderly link included.</p>
+        <div class="skill-meta"><span class="risk r-none">read-only</span><span>free</span></div>
+      </li>
+      <li class="skill glass featured" tabindex="0">
+        <div class="skill-head"><span class="skill-num">15</span><h3>agent-onchain-handshake</h3></div>
+        <p>The A2A trust contract. EIP-7702 session keys, signed policy, bounded execution, audit logging, revocation. <strong>This is what makes the rest safe.</strong></p>
+        <div class="skill-meta"><span class="risk r-med">medium</span><span>~$0.50 max</span></div>
       </li>
     </ol>
+
+    <p class="skills-foot">
+      Full spec for every skill at <a href="/skill.md"><code>/skill.md</code></a>.
+      Each one is self-contained markdown — diff-friendly, fork-friendly.
+    </p>
   </section>
 
   <!-- ─── MCP ──────────────────────────────────────────────────────────────── -->
   <section class="mcp" id="mcp">
     <header class="section-head">
       <span class="section-tag">/03 · mcp</span>
-      <h2>Six tools your agent can call directly.</h2>
-      <p>Skills give your agent <em>playbooks</em>. The BaseKit MCP server gives it <em>arms</em>.</p>
+      <h2>Thirteen tools your agent can call directly.</h2>
+      <p>Skills give your agent <em>playbooks</em>. The BaseKit MCP server gives it <em>arms</em>. Server is read-only by design — mutating actions are described by skills, executed by the user's wallet.</p>
     </header>
 
     <div class="mcp-grid">
-      <div class="mcp-tool glass">
-        <code>get_wallet_profile</code>
-        <p>Activity, holdings, counterparties for an address.</p>
-      </div>
-      <div class="mcp-tool glass">
-        <code>get_transaction_trace</code>
-        <p>Decoded trace, revert reason, failing frame.</p>
-      </div>
-      <div class="mcp-tool glass">
-        <code>estimate_token_deploy</code>
-        <p>Preflight gas + ETH cost at current base fee.</p>
-      </div>
-      <div class="mcp-tool glass">
-        <code>check_token_approvals</code>
-        <p>List active approvals; surface dangerous ones.</p>
-      </div>
-      <div class="mcp-tool glass">
-        <code>resolve_basename</code>
-        <p>Basename ↔ address, both directions.</p>
-      </div>
-      <div class="mcp-tool glass">
-        <code>simulate_swap</code>
-        <p>Quote on Uniswap V3 or Aerodrome, read-only.</p>
-      </div>
+      <div class="mcp-tool glass"><code>verify_contract</code><p>Full safety report — source, owner, mint, pause, blacklist, GoPlus.</p></div>
+      <div class="mcp-tool glass"><code>get_wallet_profile</code><p>Activity, balance, age, counterparties for a Base address.</p></div>
+      <div class="mcp-tool glass"><code>portfolio_snapshot</code><p>ETH, ERC-20 holdings, recent activity — read-only.</p></div>
+      <div class="mcp-tool glass"><code>simulate_swap</code><p>Live quote against Uniswap v3 Quoter. Does not execute.</p></div>
+      <div class="mcp-tool glass"><code>check_token_approvals</code><p>Scan Approval events. Surface unlimited + dangerous spenders.</p></div>
+      <div class="mcp-tool glass"><code>get_transaction_trace</code><p>Receipt + decoded selector + tracer links.</p></div>
+      <div class="mcp-tool glass"><code>resolve_basename</code><p>Live L2 resolver. Forward and reverse.</p></div>
+      <div class="mcp-tool glass"><code>check_basename_available</code><p>Availability + cost projection by name length.</p></div>
+      <div class="mcp-tool glass"><code>gas_now</code><p>Current Base fee + sequencer health + send-now suggestion.</p></div>
+      <div class="mcp-tool glass"><code>decode_calldata</code><p>Selector + signatures (4byte cross-check).</p></div>
+      <div class="mcp-tool glass"><code>estimate_token_deploy</code><p>Preflight gas + ETH cost.</p></div>
+      <div class="mcp-tool glass"><code>estimate_safe_deploy</code><p>Preflight Safe deploy cost by owner count.</p></div>
+      <div class="mcp-tool glass"><code>agent_policy_describe</code><p>Render a user's signed policy for confirmation UI.</p></div>
     </div>
+  </section>
+
+  <!-- ─── A2A trust layer ──────────────────────────────────────────────────── -->
+  <section class="a2a" id="a2a">
+    <header class="section-head">
+      <span class="section-tag">/04 · a2a</span>
+      <h2>Safe for agents acting on your behalf.</h2>
+      <p>The bet: agents will spend money on tools. They will only spend it on tools they can verify are safe. Every part of BaseKit is built around that.</p>
+    </header>
+
+    <div class="a2a-grid">
+      <article class="a2a-card glass">
+        <header><span class="a2a-num">01</span><h3>Declared risk</h3></header>
+        <p>Every skill ships YAML frontmatter: <code>risk_level</code>, <code>reversible</code>, <code>requires_signing</code>, <code>mutates_state</code>, <code>estimated_cost_usd_max</code>, <code>external_calls</code>. An agent reads these before deciding whether to proceed.</p>
+      </article>
+      <article class="a2a-card glass">
+        <header><span class="a2a-num">02</span><h3>Read-only by default</h3></header>
+        <p>The MCP server has no mutating tools. Every state change is described by a skill and executed by the user's wallet client. Compromising the server gets you nothing.</p>
+      </article>
+      <article class="a2a-card glass">
+        <header><span class="a2a-num">03</span><h3>Signed user policy</h3></header>
+        <p>Writes on a user's behalf require a signed policy: per-tx cap, per-day cap, allowed contracts, allowed skills, human-confirm threshold. Anchored onchain via EIP-7702 delegator.</p>
+      </article>
+      <article class="a2a-card glass">
+        <header><span class="a2a-num">04</span><h3>Bounded execution</h3></header>
+        <p>Session key, not your main key. Agent operates within the signed bounds — primary funds untouchable even if the agent is compromised.</p>
+      </article>
+      <article class="a2a-card glass">
+        <header><span class="a2a-num">05</span><h3>Audit trail</h3></header>
+        <p>Every action emits a signed log entry: skill, tx hash, policy hash, USD value. Designed to be diffable, queryable, and admissible if anything goes wrong.</p>
+      </article>
+      <article class="a2a-card glass">
+        <header><span class="a2a-num">06</span><h3>Instant revoke</h3></header>
+        <p>One transaction to revoke an agent. One nonce bump to invalidate every outstanding offchain grant. No customer support required.</p>
+      </article>
+    </div>
+
+    <pre class="a2a-snippet glass"><span class="comment"># the contract an agent makes when it acts on your behalf</span>
+<span class="snippet-line">POST /.well-known/agent.json     <span class="muted">→ capability + trust descriptor</span></span>
+<span class="snippet-line">READ policy_hash from delegator  <span class="muted">→ verify the user's signed bounds</span></span>
+<span class="snippet-line">CHECK skill.frontmatter.risk     <span class="muted">→ abort if above user's threshold</span></span>
+<span class="snippet-line">SIMULATE call, price in USD      <span class="muted">→ abort if above per-tx cap</span></span>
+<span class="snippet-line">EXECUTE via session key          <span class="muted">→ primary key untouched</span></span>
+<span class="snippet-line">EMIT signed audit log entry      <span class="muted">→ skill, tx hash, USD value, policy hash</span></span></pre>
   </section>
 
   <!-- ─── Pricing ──────────────────────────────────────────────────────────── -->
   <section class="pricing" id="pricing">
     <header class="section-head">
-      <span class="section-tag">/04 · pricing</span>
+      <span class="section-tag">/05 · pricing</span>
       <h2>Free to install. Pay when it pays you back.</h2>
       <p>Core is open source. Pro adds advanced playbooks and hosted indexing for teams shipping in production.</p>
     </header>
@@ -338,11 +433,11 @@
           <div class="price">$0<span>forever</span></div>
         </header>
         <ul>
-          <li>5 core skills</li>
-          <li>MCP server (6 tools)</li>
+          <li>15 core skills</li>
+          <li>MCP server (13 tools)</li>
+          <li>A2A trust layer</li>
           <li>Self-hosted, BYO API keys</li>
           <li>MIT license</li>
-          <li>Community support</li>
         </ul>
         <a class="plan-cta ghost" href="#install">Install free</a>
       </div>
@@ -355,12 +450,12 @@
         </header>
         <ul>
           <li>Everything in Open Source</li>
-          <li><strong>10+ advanced skills</strong> — MEV-resistant deploys, multi-sig workflows, treasury playbooks</li>
-          <li><strong>Hosted indexing</strong> — wallet & contract data without your own Alchemy key</li>
+          <li><strong>Hosted indexing</strong> — wallet + contract data without your own Alchemy key</li>
+          <li><strong>Agent policy hosting</strong> — signed policies and audit logs as a service</li>
           <li>Monthly new-skill drops</li>
           <li>Priority email support</li>
         </ul>
-        <a class="plan-cta primary" href="#waitlist">Join the Pro waitlist</a>
+        <a class="plan-cta primary" href="mailto:hello@basekit.dev?subject=Pro%20waitlist">Join the Pro waitlist</a>
       </div>
 
       <div class="plan glass">
@@ -381,11 +476,12 @@
     </div>
 
     <p class="price-foot">
-      Building something at scale? <a href="mailto:hello@basekit.dev">Enterprise &amp; white-label</a> available.
+      Building something at scale? <a href="mailto:hello@basekit.dev">Enterprise &amp; white-label</a> available. <br/>
+      Agent marketplaces buying access on behalf of end users? <a href="mailto:hello@basekit.dev?subject=A2A%20pricing">A2A pricing tier</a> available.
     </p>
   </section>
 
-  <!-- ─── FAQ / Anti-AI strip ──────────────────────────────────────────────── -->
+  <!-- ─── Opinionated strip ────────────────────────────────────────────────── -->
   <section class="strip">
     <p>
       <span class="strip-kicker">opinionated:</span>
@@ -395,6 +491,7 @@
         <span class="rot">we don't auto-emoji your prompts.</span>
         <span class="rot">we don't put a chatbot on the marketing site.</span>
         <span class="rot">we don't gate the source.</span>
+        <span class="rot">we don't ask agents to trust us — we let them verify.</span>
       </span>
     </p>
   </section>
@@ -403,10 +500,10 @@
   <footer class="foot">
     <div class="foot-grid">
       <div class="foot-brand">
-        <svg class="mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-          <path d="M11 7 L5 7 L5 33 L11 33" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" />
-          <path d="M29 7 L35 7 L35 33 L29 33" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" />
-          <rect x="14" y="14" width="12" height="12" fill="currentColor" />
+        <svg class="mark" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <rect x="10" y="10" width="44" height="44" rx="2" stroke="currentColor" stroke-width="3" transform="rotate(-7.5 32 32)"/>
+          <rect x="19" y="19" width="26" height="26" rx="1.5" stroke="currentColor" stroke-width="3" transform="rotate(7.5 32 32)"/>
+          <rect x="26" y="26" width="12" height="12" rx="1" stroke="currentColor" stroke-width="3"/>
         </svg>
         <span class="wordmark">basekit</span>
         <p>Built on Base. Built for agents. Built in the open.</p>
@@ -418,14 +515,17 @@
           <a href="#install">Install</a>
           <a href="#skills">Skills</a>
           <a href="#mcp">MCP</a>
+          <a href="#a2a">A2A</a>
           <a href="#pricing">Pricing</a>
         </div>
         <div>
           <h4>For agents</h4>
-          <a href="/llms.txt"><code>/llms.txt</code></a>
-          <a href="/agents.txt"><code>/agents.txt</code></a>
-          <a href="/skill.md"><code>/skill.md</code></a>
-          <a href="/plugin.json"><code>/plugin.json</code></a>
+          <a href="/.well-known/agent.json"><code>agent.json</code></a>
+          <a href="/.well-known/mcp.json"><code>mcp.json</code></a>
+          <a href="/skill.md"><code>skill.md</code></a>
+          <a href="/plugin.json"><code>plugin.json</code></a>
+          <a href="/llms.txt"><code>llms.txt</code></a>
+          <a href="/agents.txt"><code>agents.txt</code></a>
         </div>
         <div>
           <h4>Open source</h4>
@@ -433,12 +533,13 @@
           <a href="https://github.com/basekit/basekit/issues">Issues</a>
           <a href="https://github.com/basekit/basekit/discussions">Discussions</a>
           <a href="https://github.com/basekit/basekit/blob/main/LICENSE">License (MIT)</a>
+          <a href="/.well-known/security.txt">Security</a>
         </div>
       </div>
     </div>
 
     <div class="foot-base">
-      <span>© 2026 BaseKit · MIT</span>
+      <span>© 2026 BaseKit · MIT · v0.2.0</span>
       <span class="easter" title="try typing 'gm' on this page">made with 🩵 by builders on Base</span>
     </div>
   </footer>

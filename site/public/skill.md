@@ -1,78 +1,68 @@
----
-name: basekit
-version: 0.1.0
-description: Ship onchain on Base from a single prompt. Five playbooks + six MCP tools, portable across Claude Code, Cursor, Codex, and Windsurf.
-license: MIT
-homepage: https://basekit.dev
-source: https://github.com/basekit/basekit
-triggers:
-  - "deploy a token on base"
-  - "analyze 0x... on base"
-  - "reduce gas in this contract"
-  - "airdrop tokens to a list"
-  - "why did this tx fail on base"
----
+# BaseKit Skills — Master Index
 
-# BaseKit — aggregated SKILL.md
+BaseKit is an open library of SKILL.md playbooks for building on Base. Each skill is self-contained: an agent or human reads it and executes the workflow safely.
 
-This is the one-file drop-in. It indexes the five real SKILL.md playbooks in
-the BaseKit repo and tells your agent when to load each one. Use this when
-you want BaseKit in a runtime that supports a single SKILL.md but not a full
-plugin manifest.
+Every skill declares — in machine-readable frontmatter — `risk_level`, `reversible`, `requires_signing`, `mutates_state`, `estimated_cost_usd_max`, and `external_calls`. Agents parse this before deciding to run unattended.
 
-## When to load each sub-skill
+**15 skills shipped in v0.2 · MIT licensed · agent-safe by default**
 
-| Sub-skill                | Activate when the user asks about…                                  |
-|--------------------------|---------------------------------------------------------------------|
-| `base-deploy-token`      | Launching an ERC-20, memecoin, or any new token on Base.            |
-| `base-analyze-wallet`    | Profiling an address — holdings, activity, counterparties, risk.    |
-| `base-gas-optimize`      | Auditing or rewriting Solidity for lower gas (Base L2 economics).   |
-| `base-airdrop`           | Designing or shipping a Merkle airdrop with sybil filtering.        |
-| `base-basescan-debug`    | Debugging a failed transaction (paste a tx hash, find root cause).  |
+## Onchain skills (Base)
 
-Each sub-skill is a separate SKILL.md in the repo at `/skills/<name>/SKILL.md`.
+| Skill | Risk | Reversible | Signs | Max cost | Summary |
+|---|---|---|---|---|---|
+| **base-airdrop** | medium | false | true | $40.00 | Use this skill when the user wants to distribute tokens to multiple addresses on Base. Handles eligibility list generation, Merkle root computation, gas-efficient claim contract de |
+| **base-analyze-wallet** | none | true | false | $0.00 | Use this skill when the user asks to analyze, audit, score, or investigate a wallet address on Base. Returns activity profile (tx count, age, contract interactions), token holdings |
+| **base-basescan-debug** | none | true | false | $0.00 | Use this skill when the user has a failed, stuck, or confusing transaction on Base and wants to understand what happened. Fetches the transaction trace, decodes revert reasons, ide |
+| **base-contract-verify** | none | true | false | $0.00 | Verify a contract address on Base — source on Basescan, ABI integrity, proxy implementation, ownership graph, honeypot heuristics, allowance risk. |
+| **base-deploy-token** | high | false | true | $30.00 | Use this skill when the user wants to deploy, launch, or create an ERC-20 token on Base. Handles standard tokens, mint/burn permissions, ownership, supply caps, and liquidity routi |
+| **base-event-listener** | none | true | false | $0.00 | Subscribe to onchain events on Base with reliable backfill, reorg handling, and exactly-once delivery to a webhook or queue. |
+| **base-frame-build** | low | true | optional | $2.00 | Build a Farcaster Frame (v2 Mini App) that lives on Base — interactive embeds with onchain actions, wallet auth, and shareable cast distribution. |
+| **base-gas-optimize** | none | true | false | $0.00 | Use this skill when the user wants to reduce gas costs in a Solidity contract destined for Base. Identifies common gas-inefficient patterns (storage packing, unbounded loops, redun |
+| **base-mev-resistant** | medium | false | true | $5.00 | Execute swaps and token launches on Base with MEV protection — private mempools, commit-reveal, slippage guards, sandwich detection. |
+| **base-onramp-flow** | low | false | true | $1.00 | Get a non-crypto user funded on Base in under 3 minutes — Coinbase Onramp, Smart Wallet creation, basename claim, first-tx gas sponsorship. |
+| **base-portfolio-snapshot** | none | true | false | $0.00 | Generate a read-only portfolio snapshot for any Base address — tokens, NFTs, DeFi positions, P&L, cost basis. |
+| **base-revenue-share** | medium | false | true | $8.00 | Deploy and operate onchain revenue splits on Base — for creator royalties, team payouts, referral programs. Built on 0xSplits + custom claim contracts. |
+| **base-safe-multisig** | medium | false | true | $6.00 | Deploy, configure, and operate a Safe multisig on Base — propose transactions, gather signatures, execute, and rotate signers safely. |
+| **base-token-launch-checklist** | high | false | true | $50.00 | End-to-end token launch on Base — from contract template selection through LP add, Basescan verify, holder distribution, and post-launch monitoring. |
 
-## Safety rails (apply to every sub-skill)
+## Agent-to-agent (A2A) primitives
 
-- **Never broadcast a transaction without explicit user confirmation.**
-- **Default to Base Sepolia** for any deploy or write. Switch to mainnet only
-  when the user names the chain explicitly.
-- **Never put a private key in plaintext.** Use the user's existing signer
-  (Foundry keystore, Frame, Rabby) or ask the user to sign manually.
-- **Verify contracts on Basescan** after deploy (auto-trigger
-  `forge verify-contract`).
-- **Treat `forge create` and `cast send` as side-effects** — surface gas + ETH
-  cost first, get a yes, then execute.
+| Skill | Risk | Reversible | Signs | Max cost | Summary |
+|---|---|---|---|---|---|
+| **agent-onchain-handshake** | medium | false | true | $0.50 | A2A (agent-to-agent) handshake protocol for autonomous agents transacting on Base — capability discovery, signed authorization grants, spending limits, audit logging. |
 
-## Tools (MCP)
+## How to read a skill
 
-BaseKit ships an MCP server with six read-only tools. If the runtime supports
-MCP, install `@basekit/mcp` and call directly. If not, the sub-skills include
-fallbacks using `curl` to Alchemy / Basescan + viem in a temp script.
+Every SKILL.md is YAML frontmatter (the agent-readable contract) followed by a human-readable playbook. Agents should parse the frontmatter first; humans can skim the headings. Frontmatter is canonical — if the prose and the frontmatter disagree, the frontmatter wins.
 
-- `get_wallet_profile(address)`
-- `get_transaction_trace(tx_hash)`
-- `estimate_token_deploy(name, symbol, supply)`
-- `check_token_approvals(address)`
-- `resolve_basename(name_or_address)`
-- `simulate_swap(token_in, token_out, amount_in)`
+## Discovery endpoints
 
-## RPC defaults
+- `/llms.txt` — one-screen summary for LLMs
+- `/agents.txt` — capability + trust pointer for crawlers
+- `/skill.md` — this index
+- `/plugin.json` — Claude plugin manifest
+- `/.well-known/agent.json` — A2A capability + trust descriptor
+- `/.well-known/mcp.json` — MCP server descriptor
+- `/sitemap.xml`, `/robots.txt`, `/.well-known/security.txt`
 
-- Mainnet:  `https://mainnet.base.org`
-- Sepolia:  `https://sepolia.base.org`
-- For production usage, set `ALCHEMY_BASE_KEY` or `INFURA_BASE_KEY` env vars
-  and use `https://base-mainnet.g.alchemy.com/v2/$ALCHEMY_BASE_KEY`.
+## Trust
 
-## Style
+- MIT licensed, open source
+- No PII collection; telemetry is opt-in
+- Issues: https://github.com/basekit/basekit/issues
+- Security: security@basekit.dev
 
-- One-prompt → one outcome. No "what would you like to do next?" follow-up.
-- Show the cost (gas + ETH at current base fee) before any tx.
-- Always print the Basescan link after deploy / send.
-- Surface failure modes inline. Don't bury reverts.
+## Install
 
-## Provenance
+**Humans**
+```bash
+git clone https://github.com/basekit/basekit
+```
 
-Source: https://github.com/basekit/basekit
-Issues: https://github.com/basekit/basekit/issues
-License: MIT — fork freely.
+**Claude Desktop / MCP-aware agents**
+```json
+{ "mcpServers": { "basekit": { "command": "npx", "args": ["-y", "@basekit/mcp"] } } }
+```
+
+**Autonomous agents**
+Fetch `https://basekit.dev/.well-known/agent.json` for the full capability + trust descriptor. Treat that document as the source of truth.

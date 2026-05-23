@@ -1,5 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="none" aria-label="BaseKit">
-  <path d="M11 7 L5 7 L5 33 L11 33" stroke="#3D3DFF" stroke-width="2.5" stroke-linecap="square"/>
-  <path d="M29 7 L35 7 L35 33 L29 33" stroke="#3D3DFF" stroke-width="2.5" stroke-linecap="square"/>
-  <rect x="14" y="14" width="12" height="12" fill="#3D3DFF"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" aria-label="BaseKit">
+  <!-- Three rotating concentric squares: the "kit" inside the "base" -->
+  <rect x="10" y="10" width="44" height="44" rx="2" stroke="currentColor" stroke-width="2.5" transform="rotate(-7.5 32 32)"/>
+  <rect x="19" y="19" width="26" height="26" rx="1.5" stroke="currentColor" stroke-width="2.5" transform="rotate(7.5 32 32)"/>
+  <rect x="26" y="26" width="12" height="12" rx="1" stroke="currentColor" stroke-width="2.5"/>
 </svg>

@@ -13,6 +13,17 @@ keywords:
   - claim
   - distribution
   - erc20
+network: base
+chain_id: 8453
+risk_level: medium
+reversible: false
+requires_signing: true
+mutates_state: true
+estimated_cost_usd_max: 40.00
+trust:
+  audit_status: community-reviewed
+  external_calls: [Base RPC, Basescan API]
+  pii: none
 ---
 
 # Airdrop on Base

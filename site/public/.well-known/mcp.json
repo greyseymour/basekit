@@ -1,0 +1,42 @@
+{
+  "$schema": "https://modelcontextprotocol.io/schemas/server.json",
+  "name": "basekit-mcp",
+  "version": "0.2.0",
+  "description": "BaseKit MCP server — opinionated agent tools for the Base L2. Wraps Basescan, Base RPC, GoPlus, and the Uniswap v3 quoter behind a single safe surface.",
+  "homepage": "https://basekit.dev",
+  "license": "MIT",
+  "install": {
+    "npm": "npx -y @basekit/mcp",
+    "claude_desktop_config": {
+      "mcpServers": {
+        "basekit": {
+          "command": "npx",
+          "args": ["-y", "@basekit/mcp"],
+          "env": {
+            "BASESCAN_API_KEY": "${BASESCAN_API_KEY}",
+            "ALCHEMY_API_KEY": "${ALCHEMY_API_KEY}"
+          }
+        }
+      }
+    }
+  },
+  "transport": ["stdio"],
+  "tools": [
+    { "name": "get_wallet_profile",       "category": "read",     "risk": "none" },
+    { "name": "get_transaction_trace",    "category": "read",     "risk": "none" },
+    { "name": "check_token_approvals",    "category": "read",     "risk": "none" },
+    { "name": "resolve_basename",         "category": "read",     "risk": "none" },
+    { "name": "verify_contract",          "category": "read",     "risk": "none" },
+    { "name": "simulate_swap",            "category": "read",     "risk": "none" },
+    { "name": "portfolio_snapshot",       "category": "read",     "risk": "none" },
+    { "name": "gas_now",                  "category": "read",     "risk": "none" },
+    { "name": "decode_calldata",          "category": "read",     "risk": "none" },
+    { "name": "check_basename_available", "category": "read",     "risk": "none" },
+    { "name": "estimate_token_deploy",    "category": "preflight","risk": "none" },
+    { "name": "estimate_safe_deploy",     "category": "preflight","risk": "none" },
+    { "name": "agent_policy_describe",    "category": "read",     "risk": "none" }
+  ],
+  "side_effects": "none — server is read-only by design. Mutating actions are described by skills, executed by the user's wallet client.",
+  "auth_required": false,
+  "api_keys_optional": ["BASESCAN_API_KEY", "ALCHEMY_API_KEY", "GOPLUS_APP_KEY"]
+}

@@ -1,0 +1,65 @@
+{
+  "$schema": "https://basekit.dev/schemas/agent.json",
+  "name": "BaseKit",
+  "version": "0.2.0",
+  "homepage": "https://basekit.dev",
+  "license": "MIT",
+  "publisher": {
+    "name": "BaseKit Collective",
+    "url": "https://basekit.dev",
+    "contact": "hello@basekit.dev"
+  },
+  "description": "Open agent skills, MCP tools, and trust primitives for building on Base. Designed to be safe for autonomous agents acting on behalf of human users.",
+  "intended_for": ["human-developers", "autonomous-agents", "a2a-marketplaces"],
+  "capabilities": {
+    "skills_endpoint": "https://basekit.dev/skill.md",
+    "skills_index": "https://basekit.dev/skills.json",
+    "mcp_endpoint": "https://basekit.dev/.well-known/mcp.json",
+    "plugin_manifest": "https://basekit.dev/plugin.json",
+    "llms_txt": "https://basekit.dev/llms.txt",
+    "agents_txt": "https://basekit.dev/agents.txt"
+  },
+  "trust": {
+    "audit_status": "community-reviewed",
+    "license": "MIT",
+    "source_repo": "https://github.com/basekit/basekit",
+    "issue_tracker": "https://github.com/basekit/basekit/issues",
+    "security_contact": "security@basekit.dev",
+    "pii_handling": "none-collected",
+    "telemetry": "opt-in",
+    "policy_required_for_writes": true
+  },
+  "supported_protocols": [
+    {
+      "name": "model-context-protocol",
+      "version": "1.0",
+      "transport": "stdio"
+    },
+    {
+      "name": "eip-7702",
+      "purpose": "agent session-key authorization on Base"
+    },
+    {
+      "name": "erc-7821",
+      "purpose": "batched calls with executor"
+    }
+  ],
+  "agent_safety": {
+    "skills_declare_risk_level": true,
+    "skills_declare_reversibility": true,
+    "skills_declare_estimated_cost_max": true,
+    "skills_declare_external_calls": true,
+    "policy_hash_required_for_writes": true,
+    "audit_log_per_action": true
+  },
+  "discovery": {
+    "skill_format": "https://github.com/basekit/basekit/blob/main/docs/SKILL_FORMAT.md",
+    "manifest_signing": "ed25519",
+    "marketplace_listings": [
+      "https://mcp.so/server/basekit",
+      "https://smithery.ai/server/basekit",
+      "https://pulsemcp.com/servers/basekit"
+    ]
+  },
+  "updated_at": "2026-05-23T07:00:00Z"
+}

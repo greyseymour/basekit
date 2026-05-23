@@ -1,39 +1,36 @@
 {
-  "$schema": "https://schemas.anthropic.com/claude-plugin/v1",
+  "$schema": "https://claude.ai/schemas/plugin.json",
   "name": "basekit",
-  "version": "0.1.0",
-  "description": "The agent skill kit for Base. Ship onchain in one prompt.",
+  "version": "0.2.0",
+  "description": "Skills, MCP, and agent infrastructure for Base. 15 SKILL.md playbooks + 13-tool MCP server, MIT-licensed.",
   "homepage": "https://basekit.dev",
-  "repository": "https://github.com/basekit/basekit",
   "license": "MIT",
-  "authors": [{ "name": "BaseKit", "url": "https://basekit.dev" }],
-  "keywords": ["base", "blockchain", "ethereum", "coinbase", "agent", "web3", "onchain"],
-
+  "authors": [{ "name": "BaseKit Collective", "url": "https://basekit.dev" }],
   "skills": [
-    { "path": "./skills/base-deploy-token" },
-    { "path": "./skills/base-analyze-wallet" },
-    { "path": "./skills/base-gas-optimize" },
-    { "path": "./skills/base-airdrop" },
-    { "path": "./skills/base-basescan-debug" }
+    { "name": "agent-onchain-handshake",    "path": "skills/agent-onchain-handshake/SKILL.md" },
+    { "name": "base-airdrop",               "path": "skills/base-airdrop/SKILL.md" },
+    { "name": "base-analyze-wallet",        "path": "skills/base-analyze-wallet/SKILL.md" },
+    { "name": "base-basescan-debug",        "path": "skills/base-basescan-debug/SKILL.md" },
+    { "name": "base-contract-verify",       "path": "skills/base-contract-verify/SKILL.md" },
+    { "name": "base-deploy-token",          "path": "skills/base-deploy-token/SKILL.md" },
+    { "name": "base-event-listener",        "path": "skills/base-event-listener/SKILL.md" },
+    { "name": "base-frame-build",           "path": "skills/base-frame-build/SKILL.md" },
+    { "name": "base-gas-optimize",          "path": "skills/base-gas-optimize/SKILL.md" },
+    { "name": "base-mev-resistant",         "path": "skills/base-mev-resistant/SKILL.md" },
+    { "name": "base-onramp-flow",           "path": "skills/base-onramp-flow/SKILL.md" },
+    { "name": "base-portfolio-snapshot",    "path": "skills/base-portfolio-snapshot/SKILL.md" },
+    { "name": "base-revenue-share",         "path": "skills/base-revenue-share/SKILL.md" },
+    { "name": "base-safe-multisig",         "path": "skills/base-safe-multisig/SKILL.md" },
+    { "name": "base-token-launch-checklist","path": "skills/base-token-launch-checklist/SKILL.md" }
   ],
-
-  "mcp_servers": {
+  "mcpServers": {
     "basekit": {
       "command": "npx",
       "args": ["-y", "@basekit/mcp"],
       "env": {
         "BASESCAN_API_KEY": "${BASESCAN_API_KEY}",
-        "ALCHEMY_API_KEY": "${ALCHEMY_API_KEY:-}",
-        "BASE_RPC_URL": "${BASE_RPC_URL:-https://mainnet.base.org}"
+        "ALCHEMY_API_KEY": "${ALCHEMY_API_KEY}"
       }
     }
-  },
-
-  "commands": {
-    "base:deploy": "Activate the base-deploy-token skill",
-    "base:wallet": "Activate the base-analyze-wallet skill",
-    "base:gas": "Activate the base-gas-optimize skill",
-    "base:airdrop": "Activate the base-airdrop skill",
-    "base:debug": "Activate the base-basescan-debug skill"
   }
 }

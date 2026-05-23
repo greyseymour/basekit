@@ -1,6 +1,6 @@
 {
   "name": "@basekit/mcp",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "BaseKit MCP server — opinionated agent tools for Base. Wraps Basescan, Alchemy, Base RPC, and Coinbase Developer Platform behind a single MCP surface.",
   "type": "module",
   "main": "dist/index.js",

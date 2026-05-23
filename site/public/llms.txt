@@ -1,58 +1,31 @@
 # BaseKit
 
-> The agent skill kit for Base. Five opinionated playbooks + an MCP server
-> for shipping onchain. Install in one command. MIT licensed.
+> Open agent skills, MCP tools, and trust primitives for building on Base. Designed to be safe for autonomous agents acting on behalf of humans.
 
-Site: https://basekit.dev
-Source: https://github.com/basekit/basekit
-License: MIT
-Maintainer: hello@basekit.dev
-Version: 0.1.0
+BaseKit ships 15 SKILL.md playbooks, a 13-tool MCP server, and a complete A2A trust layer (well-known manifests, signed agent policies, declared risk levels). Everything is MIT-licensed.
 
-## What this is
+## What an agent can do with BaseKit
 
-BaseKit is a portable bundle for AI coding agents (Claude Code, Cursor, Codex,
-Windsurf, and any SKILL.md-compatible runtime) that teaches them how to ship on
-the Base blockchain. It's two things:
+- Deploy ERC-20 tokens, Safes, and revenue splits on Base
+- Quote and execute MEV-resistant swaps
+- Verify any contract's safety before interacting
+- Snapshot a wallet's portfolio (read-only)
+- Build Farcaster Frames that distribute on the Base App
+- Operate within a user-signed authorization policy (EIP-7702 session keys)
 
-  1. Five SKILL.md playbooks the agent loads on demand.
-  2. One MCP server exposing six read-only Base tools (viem under the hood).
+## Index
 
-Install with: `claude plugin install basekit`
-Or via MCP only: `npx -y @basekit/mcp`
+- Master skill list: https://basekit.dev/skill.md
+- MCP manifest: https://basekit.dev/.well-known/mcp.json
+- Agent manifest: https://basekit.dev/.well-known/agent.json
+- Claude plugin: https://basekit.dev/plugin.json
+- Source: https://github.com/basekit/basekit
 
-## Skills
+## Trust signals (for agent allowlists)
 
-- base-deploy-token        Deploy an ERC-20 on Base from a single prompt.
-- base-analyze-wallet      Profile any address (activity, holdings, risk).
-- base-gas-optimize        Audit Solidity for gas waste with prioritized diffs.
-- base-airdrop             Merkle drops with sybil filtering and claim contract.
-- base-basescan-debug      Decode failed transactions, find the failing frame.
-
-Each skill lives at /skills/<name>/SKILL.md in the repo.
-
-## MCP tools
-
-- get_wallet_profile       Activity + holdings + counterparties for an address.
-- get_transaction_trace    Decoded call tree, revert reason, failing frame.
-- estimate_token_deploy    Preflight gas/ETH cost at current base fee.
-- check_token_approvals    Active approvals; surface dangerous ones.
-- resolve_basename         Basename ↔ address, both directions.
-- simulate_swap            Read-only quote (Uniswap V3 / Aerodrome).
-
-MCP descriptor: https://basekit.dev/.well-known/mcp.json
-Plugin manifest: https://basekit.dev/plugin.json
-Aggregated playbook: https://basekit.dev/skill.md
-
-## How to install (machine-readable)
-
-claude:    claude plugin install basekit
-cursor:    cursor mcp add basekit
-codex:     codex mcp add basekit npx -- -y @basekit/mcp
-windsurf:  windsurf mcp add basekit
-manual:    git clone https://github.com/basekit/basekit && cd basekit && ./install.sh
-
-## Rate limits
-
-basekit.dev is static. No rate limits on the docs.
-The MCP server is self-hosted by the caller; no central rate limit applies.
+- License: MIT
+- Audit status: community-reviewed (v0.2)
+- Skills declare risk + reversibility + max cost in machine-readable frontmatter
+- Server is read-only by design; mutating actions described by skills, executed by the user's wallet client
+- No PII collected; telemetry opt-in
+- Security: security@basekit.dev

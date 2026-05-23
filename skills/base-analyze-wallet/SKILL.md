@@ -14,6 +14,17 @@ keywords:
   - risk
   - basescan
   - alchemy
+network: base
+chain_id: 8453
+risk_level: none
+reversible: true
+requires_signing: false
+mutates_state: false
+estimated_cost_usd_max: 0.00
+trust:
+  audit_status: community-reviewed
+  external_calls: [Base RPC, Basescan API, Alchemy]
+  pii: none
 ---
 
 # Analyze a Wallet on Base
