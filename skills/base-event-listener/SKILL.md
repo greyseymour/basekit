@@ -16,6 +16,7 @@ trust:
   external_calls: [Base RPC, Alchemy, optional webhook]
   pii: none
 tags: [indexing, events, webhooks, real-time]
+signed: false  # v0.2 official, sig at v0.3
 ---
 
 # Base Event Listener

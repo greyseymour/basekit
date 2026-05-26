@@ -25,6 +25,7 @@ trust:
   audit_status: community-reviewed
   external_calls: [Base RPC, Basescan API, Alchemy]
   pii: none
+signed: false  # v0.2 official, sig at v0.3
 ---
 
 # Analyze a Wallet on Base

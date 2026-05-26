@@ -16,6 +16,7 @@ trust:
   external_calls: [Base RPC, optional CDP Wallet API]
   pii: addresses-and-policy-only
 tags: [a2a, agents, authorization, session-keys, eip-7702]
+signed: false  # v0.2 official, sig at v0.3
 ---
 
 # Agent Onchain Handshake

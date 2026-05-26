@@ -30,8 +30,8 @@ Base's brand requires Blue/Black/White/Gray as hero colors ([Base brand color](h
 | Text primary | `#0A0A0F` | `#F2F2F5` | high-contrast |
 | Text muted | `#5A5A66` | `#9999A3` | secondary |
 | Text faint | `#9999A3` | `#5A5A66` | tertiary |
-| **Base Blue (accent)** | `#0000FF` | `#3D3DFF` | Official Base Blue (RGB-native); lifted slightly for dark mode legibility |
-| Accent hover | `#0000D1` | `#5B5BFF` | |
+| **Base Blue (accent)** | `#0000FF` | `#2752FF` | Light is official Base Blue (RGB-native). Dark variant is the same hue family lifted for legibility, tuned to read blue not violet on wide-gamut displays. |
+| Accent hover | `#0000D1` | `#4D72FF` | |
 | Accent glow | `rgba(0,0,255,0.18)` | `rgba(61,61,255,0.22)` | for halos, focus rings, glass tint |
 | Success | `#10B981` | `#34D399` | |
 | Warning | `#F59E0B` | `#FBBF24` | |

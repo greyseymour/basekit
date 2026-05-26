@@ -16,6 +16,7 @@ trust:
   external_calls: [Base RPC, Alchemy, CoinGecko, DexScreener]
   pii: address-only
 tags: [portfolio, analytics, read-only, tax]
+signed: false  # v0.2 official, sig at v0.3
 ---
 
 # Base Portfolio Snapshot

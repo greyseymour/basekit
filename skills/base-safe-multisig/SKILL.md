@@ -16,6 +16,7 @@ trust:
   external_calls: [Base RPC, Safe Transaction Service]
   pii: none
 tags: [safe, multisig, treasury, ops]
+signed: false  # v0.2 official, sig at v0.3
 ---
 
 # Base Safe Multisig

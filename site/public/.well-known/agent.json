@@ -1,7 +1,7 @@
 {
   "$schema": "https://basekit.dev/schemas/agent.json",
   "name": "BaseKit",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "homepage": "https://basekit.dev",
   "license": "MIT",
   "publisher": {
@@ -10,7 +10,11 @@
     "contact": "hello@basekit.dev"
   },
   "description": "Open agent skills, MCP tools, and trust primitives for building on Base. Designed to be safe for autonomous agents acting on behalf of human users.",
-  "intended_for": ["human-developers", "autonomous-agents", "a2a-marketplaces"],
+  "intended_for": [
+    "human-developers",
+    "autonomous-agents",
+    "a2a-marketplaces"
+  ],
   "capabilities": {
     "skills_endpoint": "https://basekit.dev/skill.md",
     "skills_index": "https://basekit.dev/skills.json",
@@ -27,7 +31,16 @@
     "security_contact": "security@basekit.dev",
     "pii_handling": "none-collected",
     "telemetry": "opt-in",
-    "policy_required_for_writes": true
+    "policy_required_for_writes": true,
+    "security_disclosure": "https://basekit.dev/security",
+    "security_txt": "https://basekit.dev/.well-known/security.txt",
+    "skills_signed": false,
+    "skills_signing_planned": "v0.3",
+    "delegator_contract": {
+      "status": "pre-audit",
+      "canonical_address": null,
+      "note": "Per-user delegator deployment from the agent-onchain-handshake skill. Canonical audited address lands at v0.3."
+    }
   },
   "supported_protocols": [
     {

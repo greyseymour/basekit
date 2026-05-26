@@ -106,7 +106,7 @@
   <section class="hero" id="top">
     <div class="hero-eyebrow">
       <span class="status-dot"></span>
-      v0.2.0 · 15 skills · 13 MCP tools · MIT
+      v0.2.1 · 15 skills · 13 MCP tools · MIT
     </div>
 
     <h1 class="hero-title">
@@ -200,6 +200,20 @@
           <span class="kicker">After install:</span>
           ask your agent <em>"deploy an ERC-20 on Base sepolia"</em> and the right skill activates automatically.
         </div>
+
+        <details class="safety-note">
+          <summary>
+            <span class="safety-dot" aria-hidden="true"></span>
+            Before you install — read this
+          </summary>
+          <ul>
+            <li><strong>Your wallet always signs.</strong> BaseKit never touches your private key. Every state-changing action is drafted by a skill and signed by your wallet client.</li>
+            <li><strong>Skills are advisory, not audited.</strong> Review the generated transaction before signing. Treat every skill like a knowledgeable colleague — useful, but you're the last line of defense.</li>
+            <li><strong>Cost caps are enforced only with <code>agent-onchain-handshake</code>.</strong> The <code>estimated_cost_usd_max</code> field is a hint your agent reads. To <em>actually</em> bound spend, pair skills with the handshake delegator (EIP-7702 policy).</li>
+            <li><strong>Keep API keys out of version control.</strong> Add this to your repo's <code>.gitignore</code>:<br><code>.cursor/mcp.json</code> · <code>~/.codeium/windsurf/mcp_config.json</code> · <code>.env*</code></li>
+            <li><strong>Only install signed skills.</strong> v0.2 skills are <code>signed: false</code> — official but not yet cryptographically signed. Community skills will require signatures starting v0.3. See <a href="/security">/security</a>.</li>
+          </ul>
+        </details>
       </div>
 
       <!-- Agent view -->
@@ -533,13 +547,14 @@
           <a href="https://github.com/basekit/basekit/issues">Issues</a>
           <a href="https://github.com/basekit/basekit/discussions">Discussions</a>
           <a href="https://github.com/basekit/basekit/blob/main/LICENSE">License (MIT)</a>
-          <a href="/.well-known/security.txt">Security</a>
+          <a href="/security">Security</a>
+          <a href="/.well-known/security.txt">security.txt</a>
         </div>
       </div>
     </div>
 
     <div class="foot-base">
-      <span>© 2026 BaseKit · MIT · v0.2.0</span>
+      <span>© 2026 BaseKit · MIT · v0.2.1</span>
       <span class="easter" title="try typing 'gm' on this page">made with 🩵 by builders on Base</span>
     </div>
   </footer>

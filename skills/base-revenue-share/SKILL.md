@@ -16,6 +16,7 @@ trust:
   external_calls: [Base RPC, 0xSplits SDK]
   pii: addresses-only
 tags: [splits, payouts, royalties, treasury]
+signed: false  # v0.2 official, sig at v0.3
 ---
 
 # Base Revenue Share

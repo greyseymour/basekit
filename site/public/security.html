@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Security · BaseKit</title>
+  <meta name="description" content="BaseKit security: threat model, disclosure policy, and what we do (and don't) protect against." />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#0A0A0F" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#FAFAFA" media="(prefers-color-scheme: light)" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" />
+  <link rel="stylesheet" href="/styles/main.css" />
+</head>
+<body>
+  <header class="nav">
+    <a class="brand" href="/">
+      <svg class="brand-mark" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+        <rect x="10" y="10" width="44" height="44" rx="2" stroke="currentColor" stroke-width="2.5" transform="rotate(-7.5 32 32)"/>
+        <rect x="19" y="19" width="26" height="26" rx="1.5" stroke="currentColor" stroke-width="2.5" transform="rotate(7.5 32 32)"/>
+        <rect x="26" y="26" width="12" height="12" rx="1" stroke="currentColor" stroke-width="2.5"/>
+      </svg>
+      <span>basekit</span>
+    </a>
+    <nav class="nav-links">
+      <a href="/#install">Install</a>
+      <a href="/#skills">Skills</a>
+      <a href="/#mcp">MCP</a>
+      <a href="/#a2a">A2A</a>
+      <a href="/#pricing">Pricing</a>
+      <a class="ghost" href="https://github.com/basekit/basekit" target="_blank" rel="noopener">GitHub ↗</a>
+    </nav>
+  </header>
+
+  <main class="doc">
+    <article class="doc-body">
+      <span class="section-tag">/security</span>
+      <h1>Security</h1>
+      <p class="lede">What we protect against, what we don't, and how to report issues. Read this before delegating real money to an agent running BaseKit.</p>
+
+      <h2>The promise (and its limits)</h2>
+      <p>BaseKit's core security claim is simple: <strong>your wallet always signs.</strong> The MCP server has no mutating tools by design — it cannot send transactions, approve tokens, or move funds. Every state-changing action is described by a markdown skill and executed by your wallet client (Frame, Rabby, Metamask, Coinbase Wallet, etc).</p>
+      <p>What this means in practice: a fully compromised BaseKit MCP server — backdoored binary, malicious package update, hijacked process — still cannot drain your wallet. The attack surface for theft is your wallet client and your signing decisions, not us.</p>
+      <p>What this <em>doesn't</em> protect against: bad transactions you approve. If a skill recommends a transaction and you sign it, the transaction executes. We give you the metadata to decide (risk_level, reversibility, cost cap, external calls) — the decision is still yours.</p>
+
+      <h2>Threat model</h2>
+      <table class="threat-table">
+        <thead>
+          <tr><th>Threat</th><th>Status</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Compromised MCP server drains wallet</td><td><span class="risk r-none">mitigated</span></td><td>No mutating tools exist on the server.</td></tr>
+          <tr><td>Skill recommends malicious transaction</td><td><span class="risk r-med">partial</span></td><td>Official skills are reviewed. Wallet client shows what you'll sign. Community skills will require signatures (v0.3).</td></tr>
+          <tr><td>Prompt injection via skill content</td><td><span class="risk r-med">partial</span></td><td>Only install signed skills from trusted sources. Agent should sandbox skill execution.</td></tr>
+          <tr><td>Supply chain attack on <code>@basekit/mcp</code></td><td><span class="risk r-med">in progress</span></td><td>npm 2FA, sigstore signing, and provenance attestations land at v0.3 publish.</td></tr>
+          <tr><td>Phishing via lookalike domains</td><td><span class="risk r-med">partial</span></td><td>Typo-squat domains registered at launch. Verify you're on <code>basekit.dev</code>.</td></tr>
+          <tr><td>API key leakage via committed config</td><td><span class="risk r-low">advisory</span></td><td>Add <code>.cursor/mcp.json</code>, <code>~/.codeium/windsurf/mcp_config.json</code>, and <code>.env*</code> to your <code>.gitignore</code>.</td></tr>
+          <tr><td>Cost caps exceeded</td><td><span class="risk r-med">advisory → enforced</span></td><td>The <code>estimated_cost_usd_max</code> field is advisory. Pair with <code>agent-onchain-handshake</code> to enforce caps onchain via EIP-7702 policy.</td></tr>
+          <tr><td>Delegator contract bug (EIP-7702)</td><td><span class="risk r-high">pre-audit</span></td><td>The canonical BaseKit delegator is not yet deployed to a fixed address. Users following the handshake skill today deploy their own. <strong>Wait for the audited canonical delegator before delegating large balances.</strong></td></tr>
+        </tbody>
+      </table>
+
+      <h2>Disclosure policy</h2>
+      <p>If you find a vulnerability, report it privately. We do not run a bounty program yet, but we acknowledge every reporter publicly with their consent and prioritize fixes.</p>
+      <ul>
+        <li><strong>Email:</strong> <code>security@basekit.dev</code></li>
+        <li><strong>PGP key:</strong> coming with v0.3 (fingerprint will be published here and at <code>/.well-known/security.txt</code>)</li>
+        <li><strong>Response time:</strong> initial acknowledgment within 48 hours, fix or mitigation within 14 days for critical issues</li>
+        <li><strong>In scope:</strong> the MCP server, official skills, the delegator contract once deployed, and this website</li>
+        <li><strong>Out of scope:</strong> user-side wallet clients, third-party APIs (Basescan, Alchemy), and code patterns demonstrated in skills that users modify before deploying</li>
+      </ul>
+
+      <h2>What we ask of you</h2>
+      <ul>
+        <li><strong>Read the transaction before signing.</strong> Every wallet client shows you what you're approving. Don't skip it.</li>
+        <li><strong>Start on Base Sepolia.</strong> Every skill works on testnet. Validate the flow with fake money first.</li>
+        <li><strong>Use the handshake.</strong> If you're delegating to an autonomous agent, do it through <code>agent-onchain-handshake</code> with a session key bounded by an explicit policy. Don't give an agent your primary key.</li>
+        <li><strong>Pin your dependencies.</strong> Reference a specific <code>@basekit/mcp</code> version in your config. Don't blindly accept updates.</li>
+      </ul>
+
+      <h2>What we don't promise</h2>
+      <p>BaseKit is MIT-licensed, provided as-is. The skills encode our best understanding of safe patterns on Base, but they are not a substitute for understanding what you're signing. No skill, no MCP server, no agent framework removes the responsibility of the person whose wallet executes the final transaction.</p>
+
+      <p class="muted">Last updated 2026-05-26 · BaseKit v0.2.1</p>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="foot-inner">
+      <span class="foot-mark">
+        <svg viewBox="0 0 64 64" width="20" height="20" fill="none" aria-hidden="true">
+          <rect x="10" y="10" width="44" height="44" rx="2" stroke="currentColor" stroke-width="2.5" transform="rotate(-7.5 32 32)"/>
+          <rect x="19" y="19" width="26" height="26" rx="1.5" stroke="currentColor" stroke-width="2.5" transform="rotate(7.5 32 32)"/>
+          <rect x="26" y="26" width="12" height="12" rx="1" stroke="currentColor" stroke-width="2.5"/>
+        </svg>
+      </span>
+      <p class="foot-fine">MIT · v0.2.1 · not affiliated with Coinbase or Base.</p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -16,6 +16,7 @@ trust:
   external_calls: [Coinbase Onramp API, Smart Wallet, Paymaster]
   pii: kyc-handled-by-coinbase
 tags: [onboarding, onramp, smart-wallet, basename, sponsored]
+signed: false  # v0.2 official, sig at v0.3
 ---
 
 # Base Onramp Flow

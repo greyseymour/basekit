@@ -16,6 +16,7 @@ trust:
   external_calls: [Flashbots Protect, MEV-Share, Base RPC]
   pii: none
 tags: [mev, swap, launch, defi, protection]
+signed: false  # v0.2 official, sig at v0.3
 ---
 
 # Base MEV-Resistant Execution

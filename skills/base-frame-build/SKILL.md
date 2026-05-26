@@ -16,6 +16,7 @@ trust:
   external_calls: [Farcaster Hub, Neynar, Base RPC]
   pii: fid-only
 tags: [farcaster, frame, mini-app, distribution]
+signed: false  # v0.2 official, sig at v0.3
 ---
 
 # Base Frame Build

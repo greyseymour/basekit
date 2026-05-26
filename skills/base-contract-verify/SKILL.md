@@ -16,6 +16,7 @@ trust:
   external_calls: [Basescan API, Base RPC, GoPlus, DeFiLlama]
   pii: none
 tags: [security, verification, audit, agent-safety]
+signed: false  # v0.2 official, sig at v0.3
 ---
 
 # Base Contract Verify

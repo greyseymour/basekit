@@ -16,6 +16,7 @@ trust:
   external_calls: [Base RPC, Basescan API, Aerodrome, Uniswap v3]
   pii: none
 tags: [launch, token, erc20, defi]
+signed: false  # v0.2 official, sig at v0.3
 ---
 
 # Base Token Launch Checklist

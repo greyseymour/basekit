@@ -24,6 +24,7 @@ trust:
   audit_status: community-reviewed
   external_calls: [Base RPC]
   pii: none
+signed: false  # v0.2 official, sig at v0.3
 ---
 
 # Gas Optimization for Base Contracts

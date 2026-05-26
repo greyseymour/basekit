@@ -8,10 +8,10 @@
 :root,
 [data-theme="dark"] {
   /* Base brand */
-  --accent: #3D3DFF;
-  --accent-hover: #5B5BFF;
+  --accent: #2752FF;
+  --accent-hover: #4D72FF;
   --accent-ink: #FFFFFF;
-  --accent-glow: rgba(61, 61, 255, 0.22);
+  --accent-glow: rgba(39, 82, 255, 0.22);
 
   /* Surfaces */
   --bg: #0A0A0F;
@@ -982,6 +982,133 @@ section {
   color: var(--accent);
   opacity: 0.85;
 }
+
+/* ---------- Doc page (security, etc.) ----------------------------------- */
+.doc {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 64px 32px 96px;
+}
+.doc-body h1 {
+  font-size: 38px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 12px 0 6px;
+  color: var(--text);
+}
+.doc-body .lede {
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin-bottom: 36px;
+}
+.doc-body h2 {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  margin: 40px 0 12px;
+  color: var(--text);
+}
+.doc-body p, .doc-body li {
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+.doc-body p strong, .doc-body li strong { color: var(--text); font-weight: 500; }
+.doc-body code {
+  font-size: 13px;
+  padding: 1px 6px;
+  background: var(--raised);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text);
+}
+.doc-body ul { padding-left: 20px; margin: 8px 0; }
+.doc-body li { margin: 8px 0; }
+.doc-body .muted { color: var(--text-faint); font-size: 13px; margin-top: 48px; }
+
+.threat-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 8px;
+  font-size: 14px;
+}
+.threat-table th, .threat-table td {
+  text-align: left;
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.threat-table th {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  font-weight: 500;
+  border-bottom-color: var(--glass-border);
+}
+.threat-table td:first-child { color: var(--text); font-weight: 500; width: 36%; }
+.threat-table td:nth-child(2) { width: 18%; white-space: nowrap; }
+.threat-table td:last-child { color: var(--text-muted); }
+
+/* ---------- Safety note (collapsible disclosure) ------------------------- */
+.safety-note {
+  margin-top: 18px;
+  padding: 14px 18px;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r-md);
+  background: color-mix(in srgb, var(--raised) 50%, transparent);
+  font-size: 14px;
+  line-height: 1.6;
+}
+.safety-note summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+  list-style: none;
+  user-select: none;
+}
+.safety-note summary::-webkit-details-marker { display: none; }
+.safety-note summary::after {
+  content: "+";
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 16px;
+  color: var(--text-faint);
+  transition: transform var(--t-fast) var(--ease);
+}
+.safety-note[open] summary::after { content: "−"; }
+.safety-note[open] summary { color: var(--text); margin-bottom: 8px; }
+.safety-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #E8AF34;
+  box-shadow: 0 0 0 2px color-mix(in srgb, #E8AF34 25%, transparent);
+}
+[data-theme="light"] .safety-dot { background: #964219; box-shadow: 0 0 0 2px color-mix(in srgb, #964219 25%, transparent); }
+.safety-note ul {
+  margin: 8px 0 4px;
+  padding-left: 18px;
+  color: var(--text-muted);
+}
+.safety-note li { margin: 6px 0; }
+.safety-note li strong { color: var(--text); font-weight: 500; }
+.safety-note code {
+  font-size: 12px;
+  padding: 1px 5px;
+  background: var(--raised);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text);
+}
+.safety-note a { color: var(--accent); border-bottom: 1px solid color-mix(in srgb, var(--accent) 40%, transparent); }
+.safety-note a:hover { border-color: var(--accent); }
 
 /* ---------- Skill meta (risk + cost badges) ------------------------------ */
 .skill-meta {
