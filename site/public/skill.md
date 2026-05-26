@@ -4,7 +4,7 @@ BaseKit is an open library of SKILL.md playbooks for building on Base. Each skil
 
 Every skill declares — in machine-readable frontmatter — `risk_level`, `reversible`, `requires_signing`, `mutates_state`, `estimated_cost_usd_max`, and `external_calls`. Agents parse this before deciding to run unattended.
 
-**15 skills shipped in v0.2 · MIT licensed · agent-safe by default**
+**16 skills shipped in v0.2.5 · MIT licensed · agent-safe by default · interoperates with Base MCP**
 
 ## Onchain skills (Base)
 
@@ -30,6 +30,12 @@ Every skill declares — in machine-readable frontmatter — `risk_level`, `reve
 | Skill | Risk | Reversible | Signs | Max cost | Summary |
 |---|---|---|---|---|---|
 | **agent-onchain-handshake** | medium | false | true | $0.50 | A2A (agent-to-agent) handshake protocol for autonomous agents transacting on Base — capability discovery, signed authorization grants, spending limits, audit logging. |
+
+## Interop
+
+| Skill | Risk | Reversible | Signs | Max cost | Summary |
+|---|---|---|---|---|---|
+| **base-mcp-bridge** | none | true | false | $0.00 | Coordination layer between BaseKit's planning skills and Base MCP's signing tools. Routes wallet ops (send/swap/sign/execute/x402) to Base MCP, keeps deploy/verify/audit/MEV-defense/multisig/airdrops/frames/A2A inside BaseKit. Run both servers side-by-side. See [BASE-MCP-INTEROP.md](/docs/BASE-MCP-INTEROP.md).
 
 ## How to read a skill
 

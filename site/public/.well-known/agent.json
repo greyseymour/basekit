@@ -1,7 +1,7 @@
 {
   "$schema": "https://basekit.dev/schemas/agent.json",
   "name": "BaseKit",
-  "version": "0.2.1",
+  "version": "0.2.5",
   "homepage": "https://basekit.dev",
   "license": "MIT",
   "publisher": {
@@ -9,7 +9,7 @@
     "url": "https://basekit.dev",
     "contact": "hello@basekit.dev"
   },
-  "description": "Open agent skills, MCP tools, and trust primitives for building on Base. Designed to be safe for autonomous agents acting on behalf of human users.",
+  "description": "Open agent skills, MCP tools, and trust primitives for building on Base. Designed to be safe for autonomous agents acting on behalf of human users. Interoperates with Base MCP — BaseKit plans, Base MCP signs.",
   "intended_for": [
     "human-developers",
     "autonomous-agents",
@@ -42,6 +42,16 @@
       "note": "Per-user delegator deployment from the agent-onchain-handshake skill. Canonical audited address lands at v0.3."
     }
   },
+  "interop_with": [
+    {
+      "name": "@base-org/base-mcp",
+      "role": "wallet-and-signing",
+      "relationship": "complementary",
+      "bridge_skill": "base-mcp-bridge",
+      "docs": "https://basekit.dev/docs/BASE-MCP-INTEROP.md",
+      "note": "Base MCP owns send/swap/sign/execute/x402. BaseKit owns deploy/verify/audit/MEV-defense/multisig/airdrops/frames/A2A-trust. Run both servers side-by-side."
+    }
+  ],
   "supported_protocols": [
     {
       "name": "model-context-protocol",
@@ -74,5 +84,5 @@
       "https://pulsemcp.com/servers/basekit"
     ]
   },
-  "updated_at": "2026-05-23T07:00:00Z"
+  "updated_at": "2026-05-26T19:30:00Z"
 }

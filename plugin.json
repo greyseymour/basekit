@@ -1,8 +1,8 @@
 {
   "$schema": "https://claude.ai/schemas/plugin.json",
   "name": "basekit",
-  "version": "0.2.0",
-  "description": "Skills, MCP, and agent infrastructure for Base. 15 SKILL.md playbooks + 13-tool MCP server, MIT-licensed.",
+  "version": "0.2.5",
+  "description": "Skills, MCP, and agent infrastructure for Base. 16 SKILL.md playbooks + 13-tool MCP server, MIT-licensed. Interoperates with Base MCP via the base-mcp-bridge skill.",
   "homepage": "https://basekit.dev",
   "license": "MIT",
   "authors": [{ "name": "BaseKit Collective", "url": "https://basekit.dev" }],
@@ -21,7 +21,8 @@
     { "name": "base-portfolio-snapshot",    "path": "skills/base-portfolio-snapshot/SKILL.md" },
     { "name": "base-revenue-share",         "path": "skills/base-revenue-share/SKILL.md" },
     { "name": "base-safe-multisig",         "path": "skills/base-safe-multisig/SKILL.md" },
-    { "name": "base-token-launch-checklist","path": "skills/base-token-launch-checklist/SKILL.md" }
+    { "name": "base-token-launch-checklist","path": "skills/base-token-launch-checklist/SKILL.md" },
+    { "name": "base-mcp-bridge",            "path": "skills/base-mcp-bridge/SKILL.md" }
   ],
   "mcpServers": {
     "basekit": {

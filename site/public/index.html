@@ -107,7 +107,7 @@
   <section class="hero" id="top">
     <div class="hero-eyebrow">
       <span class="status-dot"></span>
-      stacks with Base MCP · v0.2.3 · 15 skills · 13 tools · MIT
+      stacks with Base MCP · v0.2.5 · 16 skills · 13 tools · MIT
     </div>
 
     <h1 class="hero-title">
@@ -118,7 +118,7 @@
     </h1>
 
     <p class="hero-sub">
-      15 open SKILL.md playbooks and a 13-tool MCP server for the parts Base MCP
+      16 open SKILL.md playbooks and a 13-tool MCP server for the parts Base MCP
       doesn't cover — deploys, audits, MEV defense, multisig ops, frame builds,
       and the A2A trust layer. MIT, portable, agent-installable.
     </p>
@@ -128,7 +128,7 @@
         <span>Install BaseKit</span>
         <kbd>⌘ K</kbd>
       </a>
-      <a class="cta ghost" href="#skills">See the 15 skills</a>
+      <a class="cta ghost" href="#skills">See the 16 skills</a>
     </div>
 
     <div class="hero-terminal glass">
@@ -139,7 +139,7 @@
       </div>
       <pre class="terminal-body"><span class="prompt">$</span> <span class="cmd" id="hero-cmd">claude plugin install basekit</span><span class="caret">▍</span>
 <span class="out">→ resolving manifest from basekit.dev/plugin.json</span>
-<span class="out">→ installing 15 skills, 1 MCP server (13 tools)</span>
+<span class="out">→ installing 16 skills, 1 MCP server (13 tools)</span>
 <span class="out muted">  ✓ base-deploy-token       base-analyze-wallet</span>
 <span class="out muted">  ✓ base-mev-resistant      base-contract-verify</span>
 <span class="out muted">  ✓ base-onramp-flow        base-portfolio-snapshot</span>
@@ -147,7 +147,7 @@
 <span class="out muted">  ✓ base-revenue-share      base-event-listener</span>
 <span class="out muted">  ✓ base-gas-optimize       base-airdrop</span>
 <span class="out muted">  ✓ base-basescan-debug     base-token-launch-checklist</span>
-<span class="out muted">  ✓ agent-onchain-handshake</span>
+<span class="out muted">  ✓ agent-onchain-handshake base-mcp-bridge</span>
 <span class="out accent">ready · try: "deploy a token on Base and verify it"</span></pre>
     </div>
   </section>
@@ -203,7 +203,7 @@
           </div>
           <span class="stack-license open">MIT · fork-able · self-host</span>
         </div>
-        <p class="stack-blurb">BaseKit is 15 SKILL.md playbooks and a 13-tool read-only MCP for the builder workflows Base MCP doesn't cover — deploys, audits, MEV defense, multisig ops, airdrops, frames. Plus the A2A trust layer (EIP-7702 policy, signed handshakes) for safe autonomy.</p>
+        <p class="stack-blurb">BaseKit is 16 SKILL.md playbooks and a 13-tool read-only MCP for the builder workflows Base MCP doesn't cover — deploys, audits, MEV defense, multisig ops, airdrops, frames. Plus the A2A trust layer (EIP-7702 policy, signed handshakes) and a <code>base-mcp-bridge</code> skill that explicitly routes work to Base MCP for execution.</p>
         <ul class="stack-list">
           <li><span class="chk">✓</span> Deploy + verify ERC-20 from a prompt</li>
           <li><span class="chk">✓</span> Token launch checklist (LP, distribution, monitoring)</li>
@@ -215,6 +215,7 @@
           <li><span class="chk">✓</span> Revenue splits via 0xSplits</li>
           <li><span class="chk">✓</span> Failed-tx forensics + gas optimization</li>
           <li><span class="chk">✓</span> A2A trust layer (EIP-7702 session keys, bounded execution)</li>
+          <li><span class="chk">✓</span> <code>base-mcp-bridge</code> — explicit coexistence with Base MCP</li>
         </ul>
         <p class="stack-note"><strong>Best for:</strong> developers shipping onchain. Use BaseKit in Claude Desktop, Cursor, Claude Code, Codex, Windsurf, or any MCP host — with or without a connected wallet.</p>
       </div>
@@ -423,7 +424,7 @@
   <section class="skills" id="skills">
     <header class="section-head">
       <span class="section-tag">/02 · skills</span>
-      <h2>Fifteen playbooks. Zero copy-paste.</h2>
+      <h2>Sixteen playbooks. Zero copy-paste.</h2>
       <p>Each skill is a markdown playbook your agent loads on demand. Frontmatter declares risk, reversibility, and cost — so agents can decide whether to run unattended.</p>
     </header>
 
@@ -502,6 +503,11 @@
         <div class="skill-head"><span class="skill-num">15</span><h3>agent-onchain-handshake</h3></div>
         <p>The A2A trust contract. EIP-7702 session keys, signed policy, bounded execution, audit logging, revocation. <strong>This is what makes the rest safe.</strong></p>
         <div class="skill-meta"><span class="risk r-med">medium</span><span>~$0.50 max</span></div>
+      </li>
+      <li class="skill glass featured" tabindex="0">
+        <div class="skill-head"><span class="skill-num">16</span><h3>base-mcp-bridge</h3></div>
+        <p>Coordination layer with the official Base MCP. Tells the agent which server owns which capability — BaseKit plans, Base MCP signs. <strong>Load this first when both are installed.</strong></p>
+        <div class="skill-meta"><span class="risk r-none">read-only</span><span>free</span></div>
       </li>
     </ol>
 
