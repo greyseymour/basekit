@@ -184,6 +184,27 @@ envBtns.forEach((btn) => {
   });
 });
 
+/* ---------- Stack toggle (Base MCP / BaseKit / Together) ---------------- */
+const stackToggle = document.querySelector('.stack-toggle');
+const stackTabs = document.querySelectorAll('.stack-tab');
+const stackPanels = document.querySelectorAll('[data-stack-panel]');
+stackTabs.forEach((btn, i) => {
+  btn.addEventListener('click', () => {
+    const which = btn.dataset.stack;
+    stackTabs.forEach((b) => {
+      const active = b === btn;
+      b.classList.toggle('active', active);
+      b.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+    if (stackToggle) stackToggle.dataset.active = which;
+    stackPanels.forEach((p) => {
+      const match = p.dataset.stackPanel === which;
+      p.classList.toggle('active', match);
+      p.hidden = !match;
+    });
+  });
+});
+
 /* ---------- Copy button ------------------------------------------------- */
 const copyBtn = document.querySelector('.copy-btn');
 copyBtn?.addEventListener('click', async () => {

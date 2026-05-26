@@ -89,12 +89,13 @@
     </a>
 
     <nav class="nav-links" aria-label="Primary">
+      <a href="#stack">Stack</a>
       <a href="#install">Install</a>
       <a href="#skills">Skills</a>
       <a href="#mcp">MCP</a>
       <a href="#a2a">A2A</a>
       <a href="#pricing">Pricing</a>
-      <a href="https://github.com/basekit/basekit" class="ghost">GitHub ↗</a>
+      <a href="https://github.com/greyseymour/basekit" class="ghost">GitHub ↗</a>
     </nav>
 
     <button class="theme-toggle" aria-label="Toggle theme" data-action="toggle-theme">
@@ -106,18 +107,20 @@
   <section class="hero" id="top">
     <div class="hero-eyebrow">
       <span class="status-dot"></span>
-      v0.2.1 · 15 skills · 13 MCP tools · MIT
+      stacks with Base MCP · v0.2.3 · 15 skills · 13 tools · MIT
     </div>
 
     <h1 class="hero-title">
-      <span class="line" data-scramble="An agent that">An agent that</span>
-      <span class="line accent" data-scramble="speaks Base.">speaks Base.</span>
+      <span class="line" data-scramble="Base MCP gives your">Base MCP gives your</span>
+      <span class="line" data-scramble="agent a wallet.">agent a wallet.</span>
+      <span class="line accent" data-scramble="BaseKit gives it">BaseKit gives it</span>
+      <span class="line accent" data-scramble="the playbook.">the playbook.</span>
     </h1>
 
     <p class="hero-sub">
-      Open SKILL.md playbooks, a tight MCP server, and a complete A2A trust layer —
-      designed so autonomous agents can build on Base safely on a human's behalf.
-      Works in Claude Code, Cursor, Codex, Windsurf, and any MCP-aware runtime.
+      15 open SKILL.md playbooks and a 13-tool MCP server for the parts Base MCP
+      doesn't cover — deploys, audits, MEV defense, multisig ops, frame builds,
+      and the A2A trust layer. MIT, portable, agent-installable.
     </p>
 
     <div class="hero-ctas">
@@ -147,6 +150,151 @@
 <span class="out muted">  ✓ agent-onchain-handshake</span>
 <span class="out accent">ready · try: "deploy a token on Base and verify it"</span></pre>
     </div>
+  </section>
+
+  <!-- ─── Stack (Base MCP × BaseKit) ────────────────────────────────────────── -->
+  <section class="stack" id="stack">
+    <header class="section-head">
+      <span class="section-tag">/00 · stack</span>
+      <h2>Where BaseKit fits next to Base MCP.</h2>
+      <p>Base shipped the wallet layer for agents on May 26. BaseKit is the playbook + safety layer on top. They stack — install both, get a complete agent stack.</p>
+    </header>
+
+    <div class="stack-card glass">
+      <div class="stack-toggle" role="tablist" aria-label="Compare layers">
+        <button class="stack-tab active" role="tab" aria-selected="true" data-stack="base">
+          <span class="stack-tab-num">01</span><span>Base MCP</span>
+        </button>
+        <button class="stack-tab" role="tab" aria-selected="false" data-stack="kit">
+          <span class="stack-tab-num">02</span><span>BaseKit</span>
+        </button>
+        <button class="stack-tab" role="tab" aria-selected="false" data-stack="both">
+          <span class="stack-tab-num">×</span><span>Together</span>
+        </button>
+        <span class="stack-toggle-slider" aria-hidden="true"></span>
+      </div>
+
+      <div class="stack-panel active" data-stack-panel="base">
+        <div class="stack-panel-head">
+          <div>
+            <span class="stack-kicker">Layer 1 · by Base</span>
+            <h3>The wallet your agent acts <em>as</em>.</h3>
+          </div>
+          <span class="stack-license closed">Coinbase / Base · hosted</span>
+        </div>
+        <p class="stack-blurb">Base MCP plugs your agent into a Base Smart Account. The agent becomes a first-class onchain actor: it can hold funds, sign, swap, pay APIs in stablecoins via x402, and use plugins from leading Base apps. Every write action requires your approval.</p>
+        <ul class="stack-list">
+          <li><span class="chk">✓</span> Connect agent to your Base Account</li>
+          <li><span class="chk">✓</span> Send / receive native + ERC-20</li>
+          <li><span class="chk">✓</span> Swap tokens via Base aggregator</li>
+          <li><span class="chk">✓</span> Portfolio + transaction history</li>
+          <li><span class="chk">✓</span> Sign messages, execute contract calls</li>
+          <li><span class="chk">✓</span> x402 micropayments to APIs</li>
+          <li><span class="chk">✓</span> Plugins from leading Base apps</li>
+        </ul>
+        <p class="stack-note"><strong>Best for:</strong> giving an agent its own wallet, portfolio mgmt, agent-to-API payments, consumer-facing agent UX inside the Base App.</p>
+      </div>
+
+      <div class="stack-panel" data-stack-panel="kit" hidden>
+        <div class="stack-panel-head">
+          <div>
+            <span class="stack-kicker">Layer 2 · by the open ecosystem</span>
+            <h3>The playbooks your agent runs <em>through</em> any wallet.</h3>
+          </div>
+          <span class="stack-license open">MIT · fork-able · self-host</span>
+        </div>
+        <p class="stack-blurb">BaseKit is 15 SKILL.md playbooks and a 13-tool read-only MCP for the builder workflows Base MCP doesn't cover — deploys, audits, MEV defense, multisig ops, airdrops, frames. Plus the A2A trust layer (EIP-7702 policy, signed handshakes) for safe autonomy.</p>
+        <ul class="stack-list">
+          <li><span class="chk">✓</span> Deploy + verify ERC-20 from a prompt</li>
+          <li><span class="chk">✓</span> Token launch checklist (LP, distribution, monitoring)</li>
+          <li><span class="chk">✓</span> Contract safety scan (mint / pause / blacklist / GoPlus)</li>
+          <li><span class="chk">✓</span> MEV-resistant routing + sandwich detection</li>
+          <li><span class="chk">✓</span> Safe multisig propose / sign / execute</li>
+          <li><span class="chk">✓</span> Merkle airdrops with sybil filtering</li>
+          <li><span class="chk">✓</span> Farcaster Frame v2 / Mini App scaffolding</li>
+          <li><span class="chk">✓</span> Revenue splits via 0xSplits</li>
+          <li><span class="chk">✓</span> Failed-tx forensics + gas optimization</li>
+          <li><span class="chk">✓</span> A2A trust layer (EIP-7702 session keys, bounded execution)</li>
+        </ul>
+        <p class="stack-note"><strong>Best for:</strong> developers shipping onchain. Use BaseKit in Claude Desktop, Cursor, Claude Code, Codex, Windsurf, or any MCP host — with or without a connected wallet.</p>
+      </div>
+
+      <div class="stack-panel" data-stack-panel="both" hidden>
+        <div class="stack-panel-head">
+          <div>
+            <span class="stack-kicker">Layer 1 + Layer 2</span>
+            <h3>The complete agent stack on Base.</h3>
+          </div>
+          <span class="stack-license combo">install both</span>
+        </div>
+        <p class="stack-blurb">Base MCP is the body. BaseKit is the brain. Wire both into one agent and you get a wallet that can act <em>plus</em> the playbooks that tell it what to do safely. Same MCP host, two servers, zero conflict.</p>
+
+        <div class="stack-flow" aria-hidden="true">
+          <div class="flow-node">
+            <span class="flow-label">prompt</span>
+            <code>“deploy GRC token on sepolia, verify, seed LP”</code>
+          </div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-row">
+            <div class="flow-node kit">
+              <span class="flow-label">BaseKit</span>
+              <div class="flow-steps">
+                <span>1 · base-token-launch-checklist activates</span>
+                <span>2 · verify_contract preflight scan</span>
+                <span>3 · estimate_token_deploy → gas + USD</span>
+                <span>4 · agent-onchain-handshake binds policy</span>
+              </div>
+            </div>
+            <div class="flow-arrow flow-arrow-side">→</div>
+            <div class="flow-node base">
+              <span class="flow-label">Base MCP</span>
+              <div class="flow-steps">
+                <span>5 · wallet signs deploy tx</span>
+                <span>6 · wallet signs LP approval</span>
+                <span>7 · wallet signs LP add</span>
+                <span>8 · x402 pays Basescan verifier</span>
+              </div>
+            </div>
+          </div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-node done">
+            <span class="flow-label">result</span>
+            <code>verified token · LP live · audit trail signed</code>
+          </div>
+        </div>
+
+        <p class="stack-note"><strong>Why both:</strong> Base MCP without BaseKit is an agent with a wallet and no playbook. BaseKit without Base MCP is a playbook with no hands. The combo is what ships product.</p>
+      </div>
+    </div>
+
+    <div class="stack-matrix">
+      <div class="matrix-head">
+        <span class="matrix-cell-label">Capability</span>
+        <span class="matrix-cell-base">Base MCP</span>
+        <span class="matrix-cell-kit">BaseKit</span>
+      </div>
+      <div class="matrix-row"><span class="matrix-cell-label">Agent wallet (smart account)</span><span class="yes">✓</span><span class="no">—</span></div>
+      <div class="matrix-row"><span class="matrix-cell-label">Send / swap / sign for the agent</span><span class="yes">✓</span><span class="no">—</span></div>
+      <div class="matrix-row"><span class="matrix-cell-label">x402 micropayments to paid APIs</span><span class="yes">✓</span><span class="no">—</span></div>
+      <div class="matrix-row"><span class="matrix-cell-label">Portfolio / balance reads</span><span class="yes">✓</span><span class="yes">✓</span></div>
+      <div class="matrix-row"><span class="matrix-cell-label">Deploy + verify ERC-20</span><span class="no">—</span><span class="yes">✓</span></div>
+      <div class="matrix-row"><span class="matrix-cell-label">Token launch playbook (LP, distribution, monitoring)</span><span class="no">—</span><span class="yes">✓</span></div>
+      <div class="matrix-row"><span class="matrix-cell-label">Contract safety scan (mint/pause/blacklist)</span><span class="no">—</span><span class="yes">✓</span></div>
+      <div class="matrix-row"><span class="matrix-cell-label">MEV-resistant routing + sandwich detection</span><span class="no">—</span><span class="yes">✓</span></div>
+      <div class="matrix-row"><span class="matrix-cell-label">Safe multisig operations</span><span class="no">—</span><span class="yes">✓</span></div>
+      <div class="matrix-row"><span class="matrix-cell-label">Merkle airdrops + sybil filtering</span><span class="no">—</span><span class="yes">✓</span></div>
+      <div class="matrix-row"><span class="matrix-cell-label">Failed-tx forensics</span><span class="no">—</span><span class="yes">✓</span></div>
+      <div class="matrix-row"><span class="matrix-cell-label">Farcaster Frame v2 scaffolding</span><span class="no">—</span><span class="yes">✓</span></div>
+      <div class="matrix-row"><span class="matrix-cell-label">A2A trust layer (EIP-7702 policy, signed handshakes)</span><span class="no">—</span><span class="yes">✓</span></div>
+      <div class="matrix-row"><span class="matrix-cell-label">License</span><span class="meta">Coinbase / Base</span><span class="meta">MIT · fork freely</span></div>
+      <div class="matrix-row"><span class="matrix-cell-label">Self-host?</span><span class="meta">No</span><span class="meta">Yes</span></div>
+    </div>
+
+    <p class="stack-foot">
+      Two MCP servers, one agent. Add Base MCP for wallet powers. Add BaseKit for builder powers.
+      Read the <a href="https://docs.base.org/ai-agents">Base MCP docs</a> · then
+      <a href="#install">install BaseKit</a>.
+    </p>
   </section>
 
   <!-- ─── Install ──────────────────────────────────────────────────────────── -->
