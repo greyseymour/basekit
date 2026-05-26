@@ -30,25 +30,25 @@
   <meta name="fc:frame" content='{"version":"next","imageUrl":"https://basekit.dev/assets/og/basekit-og.png","button":{"title":"Open BaseKit","action":{"type":"launch_frame","url":"https://basekit.dev","name":"BaseKit","splashImageUrl":"https://basekit.dev/assets/favicon/android-chrome-512.png","splashBackgroundColor":"#0A0A0F"}}}' />
 
   <!-- Favicons -->
-  <link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png" />
-  <link rel="manifest" href="/site.webmanifest" />
-  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
+  <link rel="shortcut icon" href="favicon.ico" />
 
   <!-- Fonts: Inter Tight (UI) + Doto (hero display) + JetBrains Mono (code) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Doto:wght@400;700&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="stylesheet" href="styles/main.css" />
 
   <!-- Agent-discoverable metadata -->
-  <link rel="alternate" type="text/plain" title="LLM Index" href="/llms.txt" />
-  <link rel="alternate" type="text/plain" title="Agent Index" href="/agents.txt" />
-  <link rel="alternate" type="application/json" title="Agent Manifest" href="/.well-known/agent.json" />
-  <link rel="alternate" type="application/json" title="MCP Manifest" href="/.well-known/mcp.json" />
+  <link rel="alternate" type="text/plain" title="LLM Index" href="llms.txt" />
+  <link rel="alternate" type="text/plain" title="Agent Index" href="agents.txt" />
+  <link rel="alternate" type="application/json" title="Agent Manifest" href=".well-known/agent.json" />
+  <link rel="alternate" type="application/json" title="MCP Manifest" href=".well-known/mcp.json" />
 
   <!-- Structured data -->
   <script type="application/ld+json">
@@ -211,7 +211,7 @@
             <li><strong>Skills are advisory, not audited.</strong> Review the generated transaction before signing. Treat every skill like a knowledgeable colleague — useful, but you're the last line of defense.</li>
             <li><strong>Cost caps are enforced only with <code>agent-onchain-handshake</code>.</strong> The <code>estimated_cost_usd_max</code> field is a hint your agent reads. To <em>actually</em> bound spend, pair skills with the handshake delegator (EIP-7702 policy).</li>
             <li><strong>Keep API keys out of version control.</strong> Add this to your repo's <code>.gitignore</code>:<br><code>.cursor/mcp.json</code> · <code>~/.codeium/windsurf/mcp_config.json</code> · <code>.env*</code></li>
-            <li><strong>Only install signed skills.</strong> v0.2 skills are <code>signed: false</code> — official but not yet cryptographically signed. Community skills will require signatures starting v0.3. See <a href="/security">/security</a>.</li>
+            <li><strong>Only install signed skills.</strong> v0.2 skills are <code>signed: false</code> — official but not yet cryptographically signed. Community skills will require signatures starting v0.3. See <a href="security">/security</a>.</li>
           </ul>
         </details>
       </div>
@@ -219,42 +219,42 @@
       <!-- Agent view -->
       <div class="install-panel" data-panel="agent" hidden>
         <div class="agent-grid">
-          <a class="agent-card" href="/.well-known/agent.json">
+          <a class="agent-card" href=".well-known/agent.json">
             <header>
               <code>/.well-known/agent.json</code>
               <span class="badge">a2a</span>
             </header>
             <p>Full capability descriptor: skills, MCP, supported protocols (EIP-7702, ERC-7821), trust claims, security contact. The canonical machine-readable entry point.</p>
           </a>
-          <a class="agent-card" href="/.well-known/mcp.json">
+          <a class="agent-card" href=".well-known/mcp.json">
             <header>
               <code>/.well-known/mcp.json</code>
               <span class="badge">mcp</span>
             </header>
             <p>MCP server descriptor — tool catalog, install snippet for Claude Desktop config, declared side-effects (none — server is read-only).</p>
           </a>
-          <a class="agent-card" href="/skill.md">
+          <a class="agent-card" href="skill.md">
             <header>
               <code>/skill.md</code>
               <span class="badge">index</span>
             </header>
             <p>Every skill in one document. Each entry includes risk level, reversibility, and signing requirements as machine-readable frontmatter.</p>
           </a>
-          <a class="agent-card" href="/plugin.json">
+          <a class="agent-card" href="plugin.json">
             <header>
               <code>/plugin.json</code>
               <span class="badge">manifest</span>
             </header>
             <p>Claude plugin manifest. Single-install for all 15 skills + the MCP server.</p>
           </a>
-          <a class="agent-card" href="/llms.txt">
+          <a class="agent-card" href="llms.txt">
             <header>
               <code>/llms.txt</code>
               <span class="badge">summary</span>
             </header>
             <p>One-screen summary for LLMs. Trust signals, capability claims, and links to the canonical manifests.</p>
           </a>
-          <a class="agent-card" href="/agents.txt">
+          <a class="agent-card" href="agents.txt">
             <header>
               <code>/agents.txt</code>
               <span class="badge">discovery</span>
@@ -358,7 +358,7 @@
     </ol>
 
     <p class="skills-foot">
-      Full spec for every skill at <a href="/skill.md"><code>/skill.md</code></a>.
+      Full spec for every skill at <a href="skill.md"><code>/skill.md</code></a>.
       Each one is self-contained markdown — diff-friendly, fork-friendly.
     </p>
   </section>
@@ -534,12 +534,12 @@
         </div>
         <div>
           <h4>For agents</h4>
-          <a href="/.well-known/agent.json"><code>agent.json</code></a>
-          <a href="/.well-known/mcp.json"><code>mcp.json</code></a>
-          <a href="/skill.md"><code>skill.md</code></a>
-          <a href="/plugin.json"><code>plugin.json</code></a>
-          <a href="/llms.txt"><code>llms.txt</code></a>
-          <a href="/agents.txt"><code>agents.txt</code></a>
+          <a href=".well-known/agent.json"><code>agent.json</code></a>
+          <a href=".well-known/mcp.json"><code>mcp.json</code></a>
+          <a href="skill.md"><code>skill.md</code></a>
+          <a href="plugin.json"><code>plugin.json</code></a>
+          <a href="llms.txt"><code>llms.txt</code></a>
+          <a href="agents.txt"><code>agents.txt</code></a>
         </div>
         <div>
           <h4>Open source</h4>
@@ -547,8 +547,8 @@
           <a href="https://github.com/basekit/basekit/issues">Issues</a>
           <a href="https://github.com/basekit/basekit/discussions">Discussions</a>
           <a href="https://github.com/basekit/basekit/blob/main/LICENSE">License (MIT)</a>
-          <a href="/security">Security</a>
-          <a href="/.well-known/security.txt">security.txt</a>
+          <a href="security">Security</a>
+          <a href=".well-known/security.txt">security.txt</a>
         </div>
       </div>
     </div>
@@ -574,6 +574,6 @@
     </pre>
   </div>
 
-  <script src="/scripts/main.js" type="module"></script>
+  <script src="scripts/main.js" type="module"></script>
 </body>
 </html>
