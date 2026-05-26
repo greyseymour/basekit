@@ -1,31 +1,76 @@
 # BaseKit
 
 > Ship onchain on Base from a single prompt.
-> Five opinionated SKILL.md playbooks + one tight MCP server, portable across
-> Claude Code, Cursor, Codex, Windsurf, and any SKILL.md-compatible runtime.
+> 15 opinionated SKILL.md playbooks + a 13-tool MCP server, portable across
+> Claude Desktop, Claude Code, Cursor, Codex, Windsurf, and any
+> SKILL.md-compatible runtime.
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 [![Built on Base](https://img.shields.io/badge/built%20on-Base-0000FF.svg)](https://base.org)
-[![MCP](https://img.shields.io/badge/MCP-compatible-3D3DFF.svg)](https://modelcontextprotocol.io)
+[![MCP](https://img.shields.io/badge/MCP-compatible-2752FF.svg)](https://modelcontextprotocol.io)
 
 ## What this is
 
 Two things in one repo:
 
-1. **Five SKILL.md playbooks** — the agent loads them on demand.
-   - `base-deploy-token` — deploy an ERC-20 on Base from a single prompt
-   - `base-analyze-wallet` — profile any address (activity, holdings, risk)
-   - `base-gas-optimize` — audit Solidity for gas waste
-   - `base-airdrop` — Merkle drops with sybil filtering
-   - `base-basescan-debug` — decode failed transactions, find root cause
+1. **15 SKILL.md playbooks** — the agent loads them on demand.
+   - `base-deploy-token`, `base-token-launch-checklist`, `base-airdrop`
+   - `base-analyze-wallet`, `base-portfolio-snapshot`, `base-onramp-flow`
+   - `base-gas-optimize`, `base-mev-resistant`, `base-safe-multisig`
+   - `base-basescan-debug`, `base-contract-verify`, `base-event-listener`
+   - `base-frame-build`, `base-revenue-share`, `agent-onchain-handshake`
 
-2. **An MCP server with six read-only tools** — the agent can call directly.
-   - `get_wallet_profile`, `get_transaction_trace`, `estimate_token_deploy`,
-     `check_token_approvals`, `resolve_basename`, `simulate_swap`
+2. **An MCP server with 13 tools** — the agent calls them directly.
+   - **Read** — `get_wallet_profile`, `get_transaction_trace`,
+     `portfolio_snapshot`, `check_token_approvals`, `gas_now`,
+     `resolve_basename`, `check_basename_available`, `decode_calldata`
+   - **Simulate** — `estimate_token_deploy`, `estimate_safe_deploy`,
+     `simulate_swap`, `verify_contract`
+   - **Policy** — `agent_policy_describe` (returns the trust manifest)
 
-It's free, MIT, and built so an agent can install it without a human in the loop.
+MIT, free, and built so an agent can install it without a human in the loop.
 
-## Install
+## Install — Claude Desktop (right now, from source)
+
+Until `@basekit/mcp` is on npm, install from source. Takes ~3 minutes.
+
+```bash
+# 1. Clone + build
+git clone https://github.com/greyseymour/basekit.git
+cd basekit/mcp
+npm install
+npm run build
+```
+
+Then add to your Claude Desktop config:
+
+- **macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`
+- **Windows:** `%APPDATA%\Claude\claude_desktop_config.json`
+
+```json
+{
+  "mcpServers": {
+    "basekit": {
+      "command": "node",
+      "args": ["/absolute/path/to/basekit/mcp/dist/index.js"],
+      "env": {
+        "BASESCAN_API_KEY": "your_basescan_key",
+        "ALCHEMY_API_KEY": "your_alchemy_key"
+      }
+    }
+  }
+}
+```
+
+API keys are free:
+- Basescan → [basescan.org/myapikey](https://basescan.org/myapikey)
+- Alchemy → [dashboard.alchemy.com](https://dashboard.alchemy.com) (create a Base mainnet app)
+
+Restart Claude Desktop. The 13 tools show up in the hammer menu. Try:
+
+> *"What's the gas price on Base right now, and profile vitalik.base.eth"*
+
+## Install — other runtimes (coming with v0.3)
 
 ```bash
 # Claude Code (plugin install — pulls skills + MCP at once)
@@ -39,17 +84,21 @@ codex mcp add basekit npx -- -y @basekit/mcp
 
 # Windsurf
 windsurf mcp add basekit
-
-# Manual
-git clone https://github.com/basekit/basekit
-cd basekit && ./install.sh
 ```
 
-After install, ask your agent:
+These land once `@basekit/mcp` is published to npm.
 
-> *"deploy an ERC-20 on Base sepolia called Greycoin"*
+## Local test path (Inspector)
 
-The right skill activates automatically.
+Want to poke the tools directly without a host?
+
+```bash
+cd basekit/mcp
+export BASESCAN_API_KEY="..." ALCHEMY_API_KEY="..."
+npx @modelcontextprotocol/inspector node dist/index.js
+```
+
+Opens `localhost:5173` — every tool callable from a web UI.
 
 ## Repo layout
 
@@ -59,33 +108,29 @@ basekit/
 ├── README.md
 ├── LICENSE                    # MIT
 │
-├── skills/                    # SKILL.md playbooks
-│   ├── base-deploy-token/
-│   ├── base-analyze-wallet/
-│   ├── base-gas-optimize/
-│   ├── base-airdrop/
-│   └── base-basescan-debug/
-│
-├── mcp/                       # @basekit/mcp — the MCP server
+├── skills/                    # 15 SKILL.md playbooks
+├── mcp/                       # @basekit/mcp — 13-tool MCP server
 │   ├── package.json
 │   ├── src/index.ts
+│   ├── dist/index.js          # prebuilt
 │   └── tsconfig.json
 │
 ├── brand/                     # palette, type, logo
-├── docs/                      # strategy, pricing, decisions
+├── docs/                      # strategy, decisions, permissions
 ├── launch/                    # tweet thread, cast, listings
-└── site/public/               # basekit.dev landing page
+├── qa/                        # test fixtures
+└── site/public/               # basekit.dev landing
 ```
 
 ## For agentic crawlers
 
 Predictable paths, no human required:
 
+- `/.well-known/agent.json` — A2A trust manifest (security disclosure, signing status, delegator contract)
 - `/llms.txt` — plain-text index of skills + tools
 - `/agents.txt` — robots-style policy + manifest pointers
 - `/skill.md` — aggregated playbook (drop into any SKILL.md runtime)
 - `/plugin.json` — Claude plugin manifest
-- `/.well-known/mcp.json` — MCP descriptor
 
 ## Philosophy
 
@@ -95,9 +140,15 @@ Predictable paths, no human required:
 - **Never broadcast without confirmation.** Side effects require a yes.
 - **The agent does the work.** Skills are the playbook, MCP is the arm.
 
+## Security
+
+This is pre-v1.0 software. Skills are unsigned (`signed: false` in every
+frontmatter) until the v0.3 signing infrastructure ships. Read the full
+threat model at [basekit.dev/security](https://basekit.dev/security) before
+giving an agent broadcast rights. Disclose vulns to `security@basekit.dev`.
+
 ## License
 
-MIT. Fork freely. PRs welcome at
-[github.com/basekit/basekit](https://github.com/basekit/basekit).
+MIT. Fork freely. PRs welcome.
 
 Built on Base. Built for agents. Built in the open. 🩵
